@@ -7,7 +7,7 @@ filters.forEach(filter => filter.addEventListener('click', () => {
   people.forEach(person => { person.style.display = selected === 'all' || person.dataset.type === selected ? 'grid' : 'none'; });
 }));
 
-const endpoint = "https://formsubmit.co/ajax/francesco.tarantell3@unibo.it";
+const endpoint = "https://formsubmit.co/ajax/83d1c623a0456ca8801a18f8b8ffd665";
 
 document.querySelector('#abstract-form').addEventListener('submit', async event => {
   event.preventDefault();
