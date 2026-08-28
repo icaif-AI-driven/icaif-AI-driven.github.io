@@ -7,10 +7,27 @@ filters.forEach(filter => filter.addEventListener('click', () => {
   people.forEach(person => { person.style.display = selected === 'all' || person.dataset.type === selected ? 'grid' : 'none'; });
 }));
 
-document.querySelector('#abstract-form').addEventListener('submit', event => {
+const endpoint = "https://formsubmit.co/ajax/francesco.tarantell3@unibo.it";
+
+document.querySelector('#abstract-form').addEventListener('submit', async event => {
   event.preventDefault();
   const status = document.querySelector('.form-status');
-  status.textContent = 'Thanks — your abstract has been received. We will be in touch.';
-  event.target.reset();
+  const button = event.target.querySelector('button');
+  button.disabled = true;
+  status.textContent = 'Sending…';
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(event.target)
+    });
+    if (!response.ok) throw new Error('Submission failed');
+    status.textContent = 'Thanks — your abstract has been received.';
+    event.target.reset();
+  } catch (error) {
+    status.textContent = 'Unable to send. Please try again or contact the organizers.';
+  } finally {
+    button.disabled = false;
+  }
 });
 
