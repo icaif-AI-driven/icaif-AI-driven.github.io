@@ -52,10 +52,8 @@ if (canvas) {
     const delta = Math.min((time - lastTime) * .001, .05);
     lastTime = time;
     context.clearRect(0, 0, width, height);
-    context.fillStyle = '#101211';
-    context.fillRect(0, 0, width, height);
 
-    context.strokeStyle = 'rgba(214,245,74,.07)';
+    context.strokeStyle = 'rgba(16,18,17,.08)';
     context.lineWidth = 1;
     for (let x = 0; x < width; x += 44) {
       context.beginPath(); context.moveTo(x, 0); context.lineTo(x, height); context.stroke();
@@ -66,17 +64,9 @@ if (canvas) {
 
     const center = height * .51;
     context.setLineDash([3, 7]);
-    context.strokeStyle = 'rgba(243,241,235,.22)';
+    context.strokeStyle = 'rgba(16,18,17,.15)';
     context.beginPath(); context.moveTo(0, center); context.lineTo(width, center); context.stroke();
     context.setLineDash([]);
-
-    context.font = '10px DM Mono, monospace';
-    context.fillStyle = 'rgba(243,241,235,.55)';
-    context.fillText('ORDER BOOK / AI MARKET SIMULATION', 18, 23);
-    context.fillStyle = 'rgba(255,116,77,.85)';
-    context.fillText('ASK', Math.max(18, width * .22), center - 13);
-    context.fillStyle = 'rgba(214,245,74,.85)';
-    context.fillText('BID', Math.max(18, width * .22), center + 24);
 
     levels.forEach((level, index) => {
       if (Math.random() < .035) level.bidTarget = .15 + Math.random() * .82;
@@ -86,13 +76,10 @@ if (canvas) {
       const yAsk = center - 18 - index * 18;
       const yBid = center + 18 + index * 18;
       const maxBar = width * .29;
-      context.fillStyle = `rgba(255,116,77,${.12 + level.ask * .2})`;
+      context.fillStyle = `rgba(255,116,77,${.10 + level.ask * .18})`;
       context.fillRect(width * .5 - level.ask * maxBar, yAsk - 7, level.ask * maxBar, 11);
-      context.fillStyle = `rgba(214,245,74,${.12 + level.bid * .2})`;
+      context.fillStyle = `rgba(80,110,20,${.10 + level.bid * .18})`;
       context.fillRect(width * .5, yBid - 7, level.bid * maxBar, 11);
-      context.fillStyle = 'rgba(243,241,235,.62)';
-      context.fillText((102.5 - index * .05).toFixed(2), width * .5 - 42, yAsk + 3);
-      context.fillText((102.45 - index * .05).toFixed(2), width * .5 + 8, yBid + 3);
     });
 
     tape.forEach(item => {
@@ -104,7 +91,7 @@ if (canvas) {
       }
       context.fillStyle = item.color;
       context.globalAlpha = .42 + Math.sin(seconds * 2 + item.y) * .18;
-      context.fillText(item.value, item.x, item.y);
+      context.fillRect(item.x, item.y, 2 + item.value / 220, 1.5);
     });
     context.globalAlpha = 1;
     requestAnimationFrame(draw);
