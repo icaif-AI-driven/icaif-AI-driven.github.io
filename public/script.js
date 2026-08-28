@@ -53,15 +53,6 @@ if (canvas) {
     lastTime = time;
     context.clearRect(0, 0, width, height);
 
-    context.strokeStyle = 'rgba(16,18,17,.08)';
-    context.lineWidth = 1;
-    for (let x = 0; x < width; x += 44) {
-      context.beginPath(); context.moveTo(x, 0); context.lineTo(x, height); context.stroke();
-    }
-    for (let y = 0; y < height; y += 34) {
-      context.beginPath(); context.moveTo(0, y); context.lineTo(width, y); context.stroke();
-    }
-
     const center = height * .51;
     context.setLineDash([3, 7]);
     context.strokeStyle = 'rgba(16,18,17,.15)';
@@ -80,6 +71,10 @@ if (canvas) {
       context.fillRect(width * .5 - level.ask * maxBar, yAsk - 7, level.ask * maxBar, 11);
       context.fillStyle = `rgba(80,110,20,${.10 + level.bid * .18})`;
       context.fillRect(width * .5, yBid - 7, level.bid * maxBar, 11);
+      context.font = '10px DM Mono, monospace';
+      context.fillStyle = 'rgba(16,18,17,.58)';
+      context.fillText((102.5 - index * .05).toFixed(2), width * .5 - 42, yAsk + 3);
+      context.fillText((102.45 - index * .05).toFixed(2), width * .5 + 8, yBid + 3);
     });
 
     tape.forEach(item => {
@@ -91,7 +86,8 @@ if (canvas) {
       }
       context.fillStyle = item.color;
       context.globalAlpha = .42 + Math.sin(seconds * 2 + item.y) * .18;
-      context.fillRect(item.x, item.y, 2 + item.value / 220, 1.5);
+      context.font = '10px DM Mono, monospace';
+      context.fillText(item.value, item.x, item.y);
     });
     context.globalAlpha = 1;
     requestAnimationFrame(draw);

@@ -9,7 +9,7 @@
   z-index: 0;
   inset: 0;
   bottom: auto;
-  height: 390px;
+  height: 420px;
   overflow: hidden;
   background: transparent;
   pointer-events: none;
@@ -18,9 +18,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(243,241,235,.08), transparent 75%);
+  background: linear-gradient(90deg, transparent, rgba(243,241,235,.08) 50%, transparent);
 }
-#orderbook-canvas { display: block; width: 100%; height: 100%; opacity: .46; }
+#orderbook-canvas { display: block; width: 100%; height: 100%; opacity: .36; }
 .hero-copy, .scroll-note { position: relative; z-index: 1; }
 
 .event-title {
@@ -62,7 +62,7 @@ h1 { font-size: clamp(60px, 8.6vw, 122px); margin-top: 30px; }
 .speaker-note p { margin: 0; color: var(--muted); font-size: 13px; }
 
 @media (max-width: 800px) {
-  .hero-background { height: 300px; }
+  .hero-background { height: 340px; }
   .speaker-note { grid-template-columns: 1fr; gap: 7px; }
   .event-title { font-size: 34px; }
 }
