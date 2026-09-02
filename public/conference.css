@@ -33,7 +33,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.
 .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(11, 32, 27, .96) 0%, rgba(11, 32, 27, .85) 42%, rgba(11, 32, 27, .26) 100%), url('https://icaif2026.org/img/hero-v4.jpg'); background-position: center; background-size: cover; }
 .hero::after { content: ''; position: absolute; right: 6%; bottom: -105px; width: 360px; height: 360px; border: 1px solid rgba(220, 237, 120, .46); border-radius: 50%; box-shadow: 0 0 0 34px rgba(220, 237, 120, .08), 0 0 0 68px rgba(220, 237, 120, .04); }
 .hero-overlay, .hero-grid { display: none; }
-.hero-content { position: relative; z-index: 1; width: 100%; padding: 94px 0 56px; }
+.hero-content { position: relative; z-index: 1; padding: 94px 0 56px; }
 .eyebrow, .kicker { margin: 0; color: var(--lime); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 5px rgba(220, 100, 75, .2); }
