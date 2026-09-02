@@ -1,4 +1,4 @@
-name: Publish ICAIF website
+name: Build and deploy ICAIF website
 
 on:
   push:
@@ -11,27 +11,27 @@ permissions:
   id-token: write
 
 concurrency:
-  group: icaif-pages-publish
+  group: icaif-pages
   cancel-in-progress: true
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
-      - name: Prepare static website
-        run: |
-          mkdir -p dist
-          cp src/pages/index.astro dist/index.html
-          cp public/styles.css dist/styles.css
-          cp public/script.js dist/script.js
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: npm install --no-package-lock
+      - name: Build Astro site
+        run: npm run build
       - uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
