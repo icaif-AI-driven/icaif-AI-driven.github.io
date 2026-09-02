@@ -22,13 +22,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 24
-      - name: Install dependencies
-        run: npm install --no-package-lock
-      - name: Build Astro site
-        run: npm run build
+      - name: Prepare static output from Astro page
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp src/pages/index.astro dist/index.html
+          cp public/conference.css dist/conference.css
+          cp public/interaction.css dist/interaction.css
+          cp public/script.js dist/script.js
       - uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
