@@ -30,7 +30,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.
 .menu-toggle { display: none; border: 0; background: transparent; cursor: pointer; }
 
 .hero { position: relative; min-height: 680px; overflow: hidden; display: flex; align-items: stretch; background: var(--deep); color: #fff; }
-.hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(11, 32, 27, .96) 0%, rgba(11, 32, 27, .85) 42%, rgba(11, 32, 27, .26) 100%), url('https://icaif2026.org/img/hero-v4.jpg'); background-position: center; background-size: cover; }
+.hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(11, 32, 27, .96) 0%, rgba(11, 32, 27, .85) 42%, rgba(11, 32, 27, .26) 100%), url('/duomo-milano-sunset.jpg'); background-position: center; background-size: cover; }
 .hero::after { content: ''; position: absolute; right: 6%; bottom: -105px; width: 360px; height: 360px; border: 1px solid rgba(220, 237, 120, .46); border-radius: 50%; box-shadow: 0 0 0 34px rgba(220, 237, 120, .08), 0 0 0 68px rgba(220, 237, 120, .04); }
 .hero-overlay, .hero-grid { display: none; }
 .hero-content { position: relative; z-index: 1; padding: 94px 0 56px; }
@@ -133,7 +133,7 @@ footer { padding: 38px 0; background: var(--deep); color: #fff; }
   .menu-toggle i { display: block; width: 22px; height: 2px; background: var(--ink); }
   .header-link { display: none; }
   .hero { min-height: 690px; }
-  .hero::before { background-image: linear-gradient(90deg, rgba(11,32,27,.94), rgba(11,32,27,.63)), url('https://icaif2026.org/img/hero-v4.jpg'); background-position: 58% center; }
+  .hero::before { background-image: linear-gradient(90deg, rgba(11,32,27,.94), rgba(11,32,27,.63)), url('/duomo-milano-sunset.jpg'); background-position: 58% center; }
   .hero-content { padding-top: 72px; }
   .hero h1 { font-size: clamp(46px, 13vw, 74px); }
   .hero-description { font-size: 15px; }

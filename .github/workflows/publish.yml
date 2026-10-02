@@ -30,6 +30,7 @@ jobs:
           cp public/conference.css dist/conference.css
           cp public/interaction.css dist/interaction.css
           cp public/script.js dist/script.js
+          cp public/duomo-milano-sunset.jpg dist/duomo-milano-sunset.jpg
       - uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
