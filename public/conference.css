@@ -48,6 +48,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.
 .button-accent { background: var(--coral); color: #fff; }
 .button-accent:hover { background: #c8513a; }
 .button-dark { background: var(--deep); color: var(--lime); }
+.button-closed { background: rgba(251,252,250,.1); border: 1px solid rgba(255,255,255,.5); color: #fff; cursor: default; }
 .hero-text-link { color: #fff; border-bottom: 1px solid rgba(255,255,255,.56); font-size: 13px; text-decoration: none; }
 .hero-text-link span { margin-left: 9px; color: var(--lime); }
 .hero-facts { display: flex; width: min(680px, 100%); margin-top: 62px; border-top: 1px solid rgba(255,255,255,.3); }
@@ -85,11 +86,33 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.
 .date-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
 .date-card { min-height: 250px; padding: 25px; border: 1px solid var(--line); background: var(--paper); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
 .date-card:hover, .date-card.active { transform: translateY(-5px); border-color: var(--green); box-shadow: 0 12px 24px rgba(18,51,44,.09); }
+.date-card.past { opacity: .62; }
+.date-card.active { background: #f4f8dc; }
+.date-card.active::after { content: 'UPCOMING'; display: inline-block; margin-top: 20px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .12em; }
 .date-number { display: none; }
 .date-card time { display: block; color: var(--green); font: 600 16px/1.2 'Space Grotesk'; }
 .date-card time b { color: var(--ink); }
 .date-card h3 { margin: 47px 0 10px; font: 600 22px/1.15 'Space Grotesk'; letter-spacing: -.04em; }
 .date-card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.program-section { background: var(--deep); color: #fff; }
+.program-section .section-intro .kicker { color: var(--lime); }
+.program-section .section-intro h2 { color: #fff; }
+.program-section .section-intro h2 span { color: var(--lime); }
+.program-section .section-note { color: #b6c8c1; }
+.program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+.program-card { align-self: start; border: 1px solid rgba(255,255,255,.24); background: rgba(255,255,255,.035); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.program-card:hover, .program-card[open] { border-color: rgba(220,237,120,.7); background: rgba(255,255,255,.075); }
+.program-card[open] { transform: translateY(-4px); }
+.program-card summary { display: grid; grid-template-columns: 32px 1fr 24px; gap: 13px; align-items: center; min-height: 126px; padding: 20px; cursor: pointer; list-style: none; }
+.program-card summary::-webkit-details-marker { display: none; }
+.program-index { align-self: start; color: var(--lime); font: 600 11px 'Space Grotesk'; }
+.program-title strong { display: block; font: 600 20px/1.15 'Space Grotesk'; letter-spacing: -.035em; }
+.program-title small { display: block; margin-top: 10px; color: #b6c8c1; font-size: 11px; line-height: 1.4; }
+.program-toggle { color: var(--lime); font-size: 24px; text-align: right; transition: transform .2s ease; }
+.program-card[open] .program-toggle { transform: rotate(45deg); }
+.program-detail { padding: 0 20px 22px 65px; animation: fade-in .25s ease; }
+.program-detail p { margin: 0; color: #d2ddd8; font-size: 14px; line-height: 1.6; }
 
 .people-section { background: var(--soft); }
 .people-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 45px; border-bottom: 1px solid var(--line); }
@@ -154,6 +177,8 @@ footer { padding: 38px 0; background: var(--deep); color: #fff; }
   .date-grid { grid-template-columns: 1fr; margin-top: 38px; }
   .date-card { min-height: 0; }
   .date-card h3 { margin-top: 34px; font-size: 20px; }
+  .program-grid { grid-template-columns: 1fr; margin-top: 38px; }
+  .program-card summary { min-height: 100px; }
   .people-tabs { margin-top: 35px; gap: 0; }
   .people-tab { padding: 10px 9px; font-size: 11px; }
   .people-grid { grid-template-columns: 1fr; }

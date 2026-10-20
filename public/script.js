@@ -7,7 +7,10 @@ if (menuButton && navigation) {
     const open = navigation.classList.toggle('open');
     menuButton.setAttribute('aria-expanded', String(open));
   });
-  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navigation.classList.remove('open')));
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    navigation.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+  }));
 }
 
 if ('IntersectionObserver' in window) {
@@ -29,4 +32,9 @@ const panels = document.querySelectorAll('.people-panel');
 tabs.forEach(tab => tab.addEventListener('click', () => {
   tabs.forEach(item => item.classList.toggle('active', item === tab));
   panels.forEach(panel => panel.classList.toggle('active', panel.id === tab.dataset.panel));
+}));
+
+const programCards = document.querySelectorAll('.program-card');
+programCards.forEach(card => card.addEventListener('toggle', () => {
+  if (card.open) programCards.forEach(other => { if (other !== card) other.open = false; });
 }));
