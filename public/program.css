@@ -185,8 +185,6 @@
 .speaker-line { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; margin-top: 9px; }
 .speaker-line strong { color: #334c62; font-size: 13px; }
 .speaker-line span { color: #687f92; font-size: 12px; }
-.photo-credit { display: inline-block; margin-top: 6px; color: #648178; font-size: 10px; text-decoration: none; }
-.photo-credit:hover { color: #127e74; text-decoration: underline; }
 
 .coffee-break {
   display: flex;
@@ -239,7 +237,6 @@
   .keynote-copy { padding-right: 2px; }
   .speaker-line { gap: 2px 8px; }
   .speaker-line strong, .speaker-line span { font-size: 11px; }
-  .photo-credit { font-size: 9px; }
   .coffee-break { margin-left: 87px; padding: 13px; }
   .coffee-break p { font-size: 11px; }
   .coffee-break > strong { font-size: 12px; white-space: nowrap; }
