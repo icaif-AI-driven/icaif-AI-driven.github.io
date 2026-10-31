@@ -38,3 +38,33 @@ const programCards = document.querySelectorAll('.program-card');
 programCards.forEach(card => card.addEventListener('toggle', () => {
   if (card.open) programCards.forEach(other => { if (other !== card) other.open = false; });
 }));
+
+const programTabs = [...document.querySelectorAll('[data-program-tab]')];
+const activateProgramTab = tab => {
+  programTabs.forEach(item => {
+    const selected = item === tab;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+    const panel = document.getElementById(item.dataset.programTab);
+    if (panel) {
+      panel.hidden = !selected;
+      panel.classList.toggle('active', selected);
+    }
+  });
+};
+
+programTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => activateProgramTab(tab));
+  tab.addEventListener('keydown', event => {
+    let next = index;
+    if (event.key === 'ArrowRight') next = (index + 1) % programTabs.length;
+    else if (event.key === 'ArrowLeft') next = (index - 1 + programTabs.length) % programTabs.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = programTabs.length - 1;
+    else return;
+    event.preventDefault();
+    programTabs[next].focus();
+    activateProgramTab(programTabs[next]);
+  });
+});

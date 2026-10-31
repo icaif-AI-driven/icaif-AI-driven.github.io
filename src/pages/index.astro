@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/conference.css" />
+    <link rel="stylesheet" href="/program.css" />
     <link rel="stylesheet" href="/interaction.css" />
   </head>
   <body>
@@ -59,14 +60,53 @@
         <div class="date-grid reveal"><article class="date-card past"><time datetime="2026-10-12">12 OCT<br /><b>2026</b></time><div><h3>Paper submission deadline</h3><p>Submissions are closed.</p></div></article><article class="date-card past"><time datetime="2026-10-16">16 OCT<br /><b>2026</b></time><div><h3>Notification of acceptance</h3><p>Notification date.</p></div></article><article class="date-card active"><time datetime="2026-11-14">14–17 NOV<br /><b>2026</b></time><div><h3>ICAIF 2026 · Milan</h3><p>The workshop takes place in conjunction with ICAIF 2026.</p></div></article></div>
       </div></section>
 
-      <section id="program" class="section program-section"><div class="container">
-        <div class="section-intro reveal"><p class="kicker">Workshop programme</p><h2>A half-day of <span>new ideas.</span></h2><p class="section-note">The programme is in preparation. Session details and contributed presentations will be announced soon.</p></div>
-        <div class="program-grid reveal">
-          <details class="program-card" open><summary><span class="program-index">01</span><span class="program-title"><strong>Invited talks</strong><small>Speakers confirmed</small></span><span class="program-toggle" aria-hidden="true">+</span></summary><div class="program-detail"><p>Talks by Anastasia Borovykh and Charles-Albert Lehalle. Titles and timing will be announced.</p></div></details>
-          <details class="program-card"><summary><span class="program-index">02</span><span class="program-title"><strong>Contributed presentations</strong><small>Contributions to be announced</small></span><span class="program-toggle" aria-hidden="true">+</span></summary><div class="program-detail"><p>Accepted contributions and presentation details will be added to the programme.</p></div></details>
-          <details class="program-card"><summary><span class="program-index">03</span><span class="program-title"><strong>Discussion</strong><small>Format in preparation</small></span><span class="program-toggle" aria-hidden="true">+</span></summary><div class="program-detail"><p>An interactive discussion on current research challenges in AI and market microstructure.</p></div></details>
+      <section id="program" class="program-section">
+        <div class="program-heading">
+          <div class="container program-heading-inner">
+            <div><p class="program-kicker">ICAIF 2026 · Workshop programme</p><h2>One afternoon.<br /><span>Many market perspectives.</span></h2></div>
+            <p class="program-intro">Research and practice meet in a focused afternoon on AI, trading and market microstructure.</p>
+          </div>
         </div>
-      </div></section>
+        <div class="container program-container">
+          <div class="program-meta" aria-label="Workshop details">
+            <div><span>Date</span><strong>Saturday, 14 November 2026</strong></div>
+            <div><span>Time</span><strong>14:00–18:00 CET</strong></div>
+            <div><span>Location</span><strong>Room 1 · Milan</strong></div>
+          </div>
+
+          <div class="program-tabs" role="tablist" aria-label="Workshop sessions">
+            <button class="program-tab active" id="program-tab-one" type="button" role="tab" aria-selected="true" aria-controls="program-panel-one" data-program-tab="program-panel-one"><span>Session 01</span><strong>Research &amp; market dynamics</strong><small>14:00–16:00 · 3 talks + opening keynote</small></button>
+            <button class="program-tab" id="program-tab-two" type="button" role="tab" aria-selected="false" aria-controls="program-panel-two" data-program-tab="program-panel-two" tabindex="-1"><span>Session 02</span><strong>Models, simulation &amp; outlook</strong><small>16:30–18:00 · 2 talks + closing keynote</small></button>
+            <button class="program-tab" id="program-tab-posters" type="button" role="tab" aria-selected="false" aria-controls="program-panel-posters" data-program-tab="program-panel-posters" tabindex="-1"><span>Poster session</span><strong>Four presentations</strong><small>During the 16:00–16:30 coffee break</small></button>
+          </div>
+
+          <div class="program-panel active" id="program-panel-one" role="tabpanel" aria-labelledby="program-tab-one" tabindex="0">
+            <div class="session-heading"><div><span>Session 01</span><h3>Research &amp; market dynamics</h3></div><p>14:00–16:00 <small>3 talks + opening keynote</small></p></div>
+            <article class="schedule-row welcome-row"><div class="schedule-time"><strong>14:00</strong><span>14:05</span><small>05 min</small></div><div class="schedule-marker"></div><div class="schedule-copy"><span class="talk-type">Welcome</span><h4>Welcome and Opening Remarks</h4><p class="talk-authors">Workshop Organizing Committee</p></div></article>
+            <article class="schedule-row keynote-row"><div class="schedule-time"><strong>14:05</strong><span>14:45</span><small>40 min</small></div><div class="schedule-marker invited"></div><div class="keynote-card"><img src="/anastasia-borovykh.webp" alt="Anastasia Borovykh" loading="lazy" /><div class="keynote-copy"><span class="talk-type invited-label">Opening invited talk</span><h4>Lessons from Language Pretraining That Generalise to Order Books</h4><div class="speaker-line"><strong>Anastasia Borovykh</strong><span>Capital Fund Management (CFM)</span></div><a class="photo-credit" href="https://icaif2026.org/" target="_blank" rel="noreferrer">Speaker photo · ICAIF ’26 ↗</a></div></div></article>
+            <article class="schedule-row"><div class="schedule-time"><strong>14:45</strong><span>15:10</span><small>25 min</small></div><div class="schedule-marker contributed"></div><div class="schedule-copy"><span class="talk-type">Contributed talk</span><h4>OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting</h4><p class="talk-authors"><strong>Jung Hun Phee</strong> (Georgia Tech); Tucker Balch (Emory University)</p></div></article>
+            <article class="schedule-row"><div class="schedule-time"><strong>15:10</strong><span>15:35</span><small>25 min</small></div><div class="schedule-marker contributed"></div><div class="schedule-copy"><span class="talk-type">Contributed talk</span><h4>Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</h4><p class="talk-authors"><strong>Christos-Spyridon Koulouris</strong>, Carlo Campajola (University College London)</p></div></article>
+            <article class="schedule-row"><div class="schedule-time"><strong>15:35</strong><span>16:00</span><small>25 min</small></div><div class="schedule-marker contributed"></div><div class="schedule-copy"><span class="talk-type">Contributed talk</span><h4>Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</h4><p class="talk-authors"><strong>Yichong Bai</strong>, Dingyue Kan (The Hong Kong Polytechnic University)</p></div></article>
+            <div class="coffee-break"><div><span>Coffee break</span><p>Poster presentations during the coffee break</p></div><strong>16:00–16:30</strong></div>
+          </div>
+
+          <div class="program-panel" id="program-panel-two" role="tabpanel" aria-labelledby="program-tab-two" tabindex="0" hidden>
+            <div class="session-heading"><div><span>Session 02</span><h3>Models, simulation &amp; outlook</h3></div><p>16:30–18:00 <small>2 talks + closing keynote</small></p></div>
+            <article class="schedule-row"><div class="schedule-time"><strong>16:30</strong><span>16:55</span><small>25 min</small></div><div class="schedule-marker contributed"></div><div class="schedule-copy"><span class="talk-type">Contributed talk</span><h4>Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</h4><p class="talk-authors"><strong>Silu Li</strong> (Princeton University); John Mulvey (Princeton University); Siyu Li (Westlake University)</p></div></article>
+            <article class="schedule-row"><div class="schedule-time"><strong>16:55</strong><span>17:20</span><small>25 min</small></div><div class="schedule-marker contributed"></div><div class="schedule-copy"><span class="talk-type">Contributed talk</span><h4>Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</h4><p class="talk-authors">Andrea Quaranta (Luiss University); Aldo Glielmo (Banca d’Italia); <strong>Andrea Coletta</strong> (Banca d’Italia)</p></div></article>
+            <article class="schedule-row keynote-row"><div class="schedule-time"><strong>17:20</strong><span>18:00</span><small>40 min</small></div><div class="schedule-marker invited"></div><div class="keynote-card"><img src="/charles-albert-lehalle.webp" alt="Charles-Albert Lehalle" loading="lazy" /><div class="keynote-copy"><span class="talk-type invited-label">Closing invited talk</span><h4>When Proofs Are Abundant, What Is a Paper For?</h4><div class="speaker-line"><strong>Charles-Albert Lehalle</strong><span>École Polytechnique</span></div><a class="photo-credit" href="https://icaif2026.org/" target="_blank" rel="noreferrer">Speaker photo · ICAIF ’26 ↗</a></div></div></article>
+          </div>
+
+          <div class="program-panel poster-panel" id="program-panel-posters" role="tabpanel" aria-labelledby="program-tab-posters" tabindex="0" hidden>
+            <div class="session-heading"><div><span>16:00–16:30 CET</span><h3>Poster presentations</h3></div><p>4 posters <small>During the coffee break</small></p></div>
+            <article class="poster-card"><span>01</span><div><small>Poster presentation</small><h4>Beyond Order Book Snapshots: MSTFormer for Message-Aware Spatio-Temporal Forecasting</h4><p><strong>Nazar Aktosun</strong>, Emre Sefer <i>· Özyeğin University</i></p></div></article>
+            <article class="poster-card"><span>02</span><div><small>Poster presentation</small><h4>Implied Volatility Surface Forecasting Under Earnings-Driven Distribution Shift: Transfer from Ordinary Trading Days</h4><p>Hyunoh Yeo, Jaehoon Lee, Seunghan Lee, Jun Seo, Junhyeok Kang, Sungdong Yoo, Minjae Kim, Tae Yoon Lim, Sangjun Han, Dongwan Kang, Hwanil Choi, Soonyoung Lee, <strong>Wonbin Ahn</strong> <i>· LG AI Research</i></p></div></article>
+            <article class="poster-card"><span>03</span><div><small>Poster presentation</small><h4>Where Does Learned In-Context Policy Mirror Descent Pay Off in Market Making? A Component Diagnosis</h4><p>Xinyue Wu, <strong>Yuhe Sui</strong>, Shufang Chen, Yingzhi Tang <i>· Quantitative Research Society</i></p></div></article>
+            <article class="poster-card"><span>04</span><div><small>Poster presentation</small><h4>Splitting the Seat: Cooperative Multi-Agent Market Making on Prediction-Market Order Books</h4><p><strong>Skander Lejmi</strong> <i>· London School of Economics</i></p></div></article>
+          </div>
+          <p class="program-footnote">Presenting authors are highlighted in bold. All times are CET (UTC+1). Invited talks: 35 min + 5 min Q&amp;A · Contributed talks: 20 min + 5 min Q&amp;A.</p>
+        </div>
+      </section>
 
       <section id="people" class="section people-section"><div class="container">
         <div class="section-intro reveal"><p class="kicker">Community</p><h2>The <span>people.</span></h2></div>
@@ -80,6 +120,6 @@
     </main>
 
     <footer><div class="container footer-layout"><div><a class="brand footer-brand" href="#home"><span class="brand-symbol">I</span><span>ICAIF <b>'26</b></span></a><p>AI-Driven Market Microstructure<br />in Centralized and Decentralized Finance</p></div><div><p>Workshop at the 7th ACM International Conference on AI in Finance<br />Milan · 14–17 November 2026</p><a href="https://icaif2026.org/" target="_blank" rel="noreferrer">Visit ICAIF 2026 ↗</a></div></div></footer>
-    <script src="/script.js"></script>
+    <script src="/script.js" is:inline></script>
   </body>
 </html>
