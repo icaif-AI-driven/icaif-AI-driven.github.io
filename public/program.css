@@ -75,6 +75,8 @@
 .program-meta > div + div { border-left: 1px solid var(--program-line); }
 .program-meta span { display: block; color: #71849a; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .program-meta strong { display: block; margin-top: 5px; font: 600 15px 'Space Grotesk', sans-serif; }
+.program-meta .venue-link { color: inherit; text-decoration: underline; text-decoration-color: #aab8c8; text-underline-offset: 3px; }
+.program-meta .venue-link:hover { color: #2f796b; text-decoration-color: currentColor; }
 
 .program-tabs {
   display: grid;
