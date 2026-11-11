@@ -4,3 +4,6 @@ dist/
 .env
 .DS_Store
 
+
+# Plaintext talk PDFs: keep local and encrypt before publishing
+/private-presentations/

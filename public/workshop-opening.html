@@ -137,7 +137,7 @@
     @media (min-width: 901px) {
       .stage.focus-mode { grid-template-rows: 56px minmax(0,1fr) 51px; padding-inline: clamp(34px,6vw,116px); }
       .stage.focus-mode h1 { font-size: clamp(60px,7vw,122px); }
-      .stage.focus-mode .program-board { height: calc(100dvh - 126px); max-height: none; }
+      .stage.focus-mode .program-board { height: calc(100dvh - 180px); max-height: none; }
       .stage.focus-mode .spotlight-title { font-size: clamp(24px,2.05vw,32px); }
     }
     @media (max-width: 900px) {
@@ -267,7 +267,7 @@
     #market { opacity: .50; }
     .main-grid { grid-template-columns: minmax(0,.9fr) minmax(520px,1.1fr); gap: clamp(28px,3.25vw,62px); }
     h1 { font-size: clamp(54px,5.15vw,102px); }
-    .program-board { height: min(860px,calc(100svh - 130px)); border-color: rgba(166,245,219,.4); background: linear-gradient(135deg,rgba(10,43,62,.94),rgba(8,66,79,.92) 47%,rgba(48,73,53,.91)); box-shadow: 0 38px 110px rgba(0,0,0,.39),0 0 44px rgba(65,197,180,.12),inset 0 1px rgba(255,255,255,.12); }
+    .program-board { height: min(860px,calc(100svh - 180px)); border-color: rgba(166,245,219,.4); background: linear-gradient(135deg,rgba(10,43,62,.94),rgba(8,66,79,.92) 47%,rgba(48,73,53,.91)); box-shadow: 0 38px 110px rgba(0,0,0,.39),0 0 44px rgba(65,197,180,.12),inset 0 1px rgba(255,255,255,.12); }
     .program-board::before { background: radial-gradient(ellipse at 18% 22%,rgba(65,221,197,.32),transparent 43%),radial-gradient(ellipse at 82% 70%,rgba(220,237,120,.25),transparent 41%),radial-gradient(ellipse at 72% 12%,rgba(239,115,88,.2),transparent 37%),radial-gradient(ellipse at 50% 92%,rgba(74,122,227,.16),transparent 44%); background-size: 180% 180%; animation: board-aura 16s ease-in-out infinite alternate; }
     .program-board::after { background: linear-gradient(112deg,transparent 12%,rgba(225,255,239,.1) 45%,transparent 62%); animation-duration: 10s; }
     .spotlight { border-color: rgba(112,242,212,.42); background: linear-gradient(125deg,rgba(8,44,61,.92),rgba(12,88,91,.87) 58%,rgba(86,89,46,.83)); box-shadow: 0 20px 50px rgba(0,0,0,.23),0 0 34px rgba(68,210,186,.14),inset 0 1px rgba(255,255,255,.12); }
@@ -309,6 +309,36 @@
     .poster h1 em { letter-spacing: -.07em; padding-right: .07em; }
     @media (max-width: 360px) {
       .poster h1 em { letter-spacing: -.078em; padding-right: .03em; }
+    }
+
+    .presentation-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(220,237,120,.42); text-underline-offset: .16em; text-decoration-thickness: 1px; transition: color .2s ease, text-decoration-color .2s ease; }
+    .presentation-link:hover, .presentation-link:focus-visible { color: #f3f9d1; text-decoration-color: var(--lime); }
+    .spotlight-title > .presentation-link { display: block; color: inherit; }
+    .presentation-dialog { width: min(1080px,96vw); height: min(880px,92vh); max-width: 96vw; max-height: 92vh; margin: auto; padding: 20px; overflow: hidden; border: 1px solid rgba(166,245,219,.42); border-radius: 18px; background: #071d25; color: #f4f8f4; box-shadow: 0 35px 120px rgba(0,0,0,.55); }
+    .presentation-dialog[open] { display: grid; grid-template-rows: auto auto auto minmax(0,1fr); gap: 12px; }
+    .presentation-dialog::backdrop { background: rgba(2,10,15,.84); backdrop-filter: blur(9px); }
+    .presentation-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .presentation-dialog-head h2 { margin: 5px 0 0; font-size: clamp(18px,2.4vw,28px); line-height: 1.15; }
+    .presentation-close { width: 34px; height: 34px; border: 1px solid rgba(220,237,120,.34); border-radius: 50%; background: rgba(255,255,255,.05); color: inherit; font-size: 21px; cursor: pointer; }
+    .presentation-status { margin: 0; color: rgba(239,247,242,.78); font-size: 13px; line-height: 1.5; }
+    .presentation-form { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; }
+    .presentation-password-field { display: grid; flex: 1 1 260px; gap: 6px; color: #b9d9cf; font-size: 11px; }
+    .presentation-password-field input { width: 100%; box-sizing: border-box; min-height: 42px; padding: 9px 12px; border: 1px solid rgba(166,245,219,.35); border-radius: 7px; outline: none; background: rgba(255,255,255,.07); color: #fff; font: inherit; }
+    .presentation-password-field input:focus { border-color: var(--lime); box-shadow: 0 0 0 3px rgba(220,237,120,.12); }
+    .presentation-unlock { min-height: 42px; padding: 0 16px; border: 0; border-radius: 7px; background: var(--lime); color: #10221d; font: inherit; font-weight: 750; cursor: pointer; }
+    .presentation-viewer { width: 100%; height: 100%; min-height: 0; border: 1px solid rgba(220,237,120,.16); border-radius: 9px; background: #fff; }
+    @media (min-width: 901px) {
+      .program-board { height: min(860px,calc(100svh - 180px)); }
+      .stage.focus-mode .program-board { height: min(860px,calc(100dvh - 180px)); }
+    }
+    @media (max-height: 820px) and (min-width: 901px) {
+      html, body { height: auto; min-height: 100%; }
+      body { overflow-x: hidden; overflow-y: auto; }
+      .stage:not(.focus-mode) { height: auto; min-height: 100svh; grid-template-rows: 56px minmax(min-content,1fr) 51px; }
+      .main-grid { padding: 14px 0; }
+      .program-board { height: min(790px,calc(100svh - 135px)); min-height: 0; }
+      .stage.focus-mode { grid-template-rows: 56px minmax(0,1fr) 51px; }
+      .stage.focus-mode .program-board { height: min(790px,calc(100dvh - 135px)); min-height: 0; }
     }
   </style>
 </head>
@@ -358,14 +388,14 @@
           <div class="agenda-heading"><span>Programme highlights</span><span class="slide-count" id="slide-count">01 / 09</span></div>
           <div class="agenda-window" id="agenda-window" aria-label="Workshop talks">
             <article class="agenda-row active" data-index="0"><time class="agenda-time">14:00</time><div class="agenda-copy"><span>Welcome</span><strong>Welcome and Opening Remarks</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="1"><time class="agenda-time">14:05</time><div class="agenda-copy"><span>Opening invited talk</span><strong>Lessons from Language Pretraining That Generalise to Order Books</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="2"><time class="agenda-time">14:45</time><div class="agenda-copy"><span>Contributed talk</span><strong>OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="3"><time class="agenda-time">15:10</time><div class="agenda-copy"><span>Contributed talk</span><strong>Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="4"><time class="agenda-time">15:35</time><div class="agenda-copy"><span>Contributed talk</span><strong>Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="1"><time class="agenda-time">14:05</time><div class="agenda-copy"><span>Opening invited talk</span><strong><a class="presentation-link" href="/presentations/encrypted/anastasia-borovykh.pdf.enc" data-presentation="anastasia-borovykh">Lessons from Language Pretraining That Generalise to Order Books</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="2"><time class="agenda-time">14:45</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/orderflowdit.pdf.enc" data-presentation="orderflowdit">OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="3"><time class="agenda-time">15:10</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/beyond-supra-competitive-outcomes.pdf.enc" data-presentation="beyond-supra-competitive-outcomes">Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="4"><time class="agenda-time">15:35</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/herding-or-racing.pdf.enc" data-presentation="herding-or-racing">Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</a></strong></div><i class="agenda-dot"></i></article>
             <article class="agenda-row" data-index="5"><time class="agenda-time">16:00</time><div class="agenda-copy"><span>Coffee break</span><strong>Poster presentations · coffee break</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong>Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="7"><time class="agenda-time">16:55</time><div class="agenda-copy"><span>Contributed talk</span><strong>Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="8"><time class="agenda-time">17:20</time><div class="agenda-copy"><span>Closing invited talk</span><strong>When Proofs Are Abundant, What Is a Paper For?</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/same-exposure-different-clocks.pdf.enc" data-presentation="same-exposure-different-clocks">Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="7"><time class="agenda-time">16:55</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/chat2lob.pdf.enc" data-presentation="chat2lob">Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="8"><time class="agenda-time">17:20</time><div class="agenda-copy"><span>Closing invited talk</span><strong><a class="presentation-link" href="/presentations/encrypted/when-proofs-are-abundant.pdf.enc" data-presentation="when-proofs-are-abundant">When Proofs Are Abundant, What Is a Paper For?</a></strong></div><i class="agenda-dot"></i></article>
           </div>
           <div class="poster-window"><span>Poster session</span><strong>Also on display during lunch · 13:00–14:00<br />Coffee break · 16:00–16:30</strong></div>
         </section>
@@ -405,21 +435,47 @@
     </footer>
   </div>
 
+  <dialog class="presentation-dialog" id="presentation-dialog" aria-labelledby="presentation-dialog-title">
+    <div class="presentation-dialog-head">
+      <div><span class="board-kicker">Encrypted workshop presentation</span><h2 id="presentation-dialog-title">Presentation</h2></div>
+      <button class="presentation-close" id="presentation-close" type="button" aria-label="Close presentation">×</button>
+    </div>
+    <p class="presentation-status" id="presentation-status" role="status" aria-live="polite">Loading encrypted presentation…</p>
+    <form class="presentation-form" id="presentation-unlock-form" hidden>
+      <label class="presentation-password-field" for="presentation-password">Workshop access password
+        <input id="presentation-password" name="password" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+      </label>
+      <button class="presentation-unlock" type="submit">Unlock presentation</button>
+    </form>
+    <iframe class="presentation-viewer" id="presentation-viewer" title="Decrypted workshop presentation" hidden></iframe>
+  </dialog>
+
   <script>
     (() => {
       const talks = [
         { time: "14:00", type: "Welcome", title: "Welcome and Opening Remarks", speaker: "Workshop Organizing Committee" },
-        { time: "14:05", type: "Opening invited talk", title: "Lessons from Language Pretraining That Generalise to Order Books", speaker: "Anastasia Borovykh · Capital Fund Management (CFM)" },
-        { time: "14:45", type: "Contributed talk", title: "OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting", speaker: "Tucker Balch · Emory University" },
-        { time: "15:10", type: "Contributed talk", title: "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games", speaker: "Christos-Spyridon Koulouris · Carlo Campajola · University College London" },
-        { time: "15:35", type: "Contributed talk", title: "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets", speaker: "Yichong Bai · Dingyue Kan · The Hong Kong Polytechnic University" },
+        { time: "14:05", type: "Opening invited talk", title: "Lessons from Language Pretraining That Generalise to Order Books", presentation: "anastasia-borovykh", speaker: "Anastasia Borovykh · Capital Fund Management (CFM)" },
+        { time: "14:45", type: "Contributed talk", title: "OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting", presentation: "orderflowdit", speaker: "Tucker Balch · Emory University" },
+        { time: "15:10", type: "Contributed talk", title: "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games", presentation: "beyond-supra-competitive-outcomes", speaker: "Christos-Spyridon Koulouris · Carlo Campajola · University College London" },
+        { time: "15:35", type: "Contributed talk", title: "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets", presentation: "herding-or-racing", speaker: "Yichong Bai · Dingyue Kan · The Hong Kong Polytechnic University" },
         { time: "16:00", type: "Coffee break", title: "Poster presentations · coffee break", speaker: "Poster session · 16:00–16:30 CET" },
-        { time: "16:30", type: "Contributed talk", title: "Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs", speaker: "Siyu Li · Westlake University" },
-        { time: "16:55", type: "Contributed talk", title: "Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models", speaker: "Andrea Coletta · Banca d’Italia" },
-        { time: "17:20", type: "Closing invited talk", title: "When Proofs Are Abundant, What Is a Paper For?", speaker: "Charles-Albert Lehalle · École Polytechnique" }
+        { time: "16:30", type: "Contributed talk", title: "Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs", presentation: "same-exposure-different-clocks", speaker: "Siyu Li · Westlake University" },
+        { time: "16:55", type: "Contributed talk", title: "Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models", presentation: "chat2lob", speaker: "Andrea Coletta · Banca d’Italia" },
+        { time: "17:20", type: "Closing invited talk", title: "When Proofs Are Abundant, What Is a Paper For?", presentation: "when-proofs-are-abundant", speaker: "Charles-Albert Lehalle · École Polytechnique" }
       ];
       const rows = [...document.querySelectorAll(".agenda-row")];
       const spotlight = document.getElementById("spotlight-title");
+      const presentationDialog = document.getElementById("presentation-dialog");
+      const presentationDialogTitle = document.getElementById("presentation-dialog-title");
+      const presentationStatus = document.getElementById("presentation-status");
+      const presentationForm = document.getElementById("presentation-unlock-form");
+      const presentationPassword = document.getElementById("presentation-password");
+      const presentationFrame = document.getElementById("presentation-viewer");
+      const presentationClose = document.getElementById("presentation-close");
+      let pendingPresentation = null;
+      let activePresentationUrl = null;
+      let sessionPresentationKey = null;
+      let sessionPresentationSalt = null;
       const label = document.getElementById("spotlight-label");
       const time = document.getElementById("spotlight-time");
       const speaker = document.getElementById("spotlight-speaker");
@@ -488,7 +544,18 @@
         window.setTimeout(() => {
           label.textContent = talk.type;
           time.textContent = talk.time;
-          spotlight.textContent = talk.title;
+          spotlight.replaceChildren();
+          if (talk.presentation) {
+            const link = document.createElement("a");
+            link.className = "presentation-link";
+            link.href = `/presentations/encrypted/${talk.presentation}.pdf.enc`;
+            link.dataset.presentation = talk.presentation;
+            link.textContent = talk.title;
+            link.setAttribute("aria-label", `Open encrypted presentation: ${talk.title}`);
+            spotlight.append(link);
+          } else {
+            spotlight.textContent = talk.title;
+          }
           speaker.textContent = talk.speaker;
           count.textContent = `${String(active + 1).padStart(2,"0")} / ${String(talks.length).padStart(2,"0")}`;
           spotlight.classList.remove("fade");
@@ -516,6 +583,171 @@
         nextTalk = window.setInterval(() => selectTalk(active + 1), 10500);
         nextPhrase = window.setInterval(nextPhraseText, 7500);
       }
+
+
+      const presentationStoreName = "icaif-presentation-keys";
+      const presentationStoreVersion = 1;
+      const presentationCacheId = "workshop-2026-v1";
+      const presentationMagic = "ICAIFP01";
+      const presentationDirectory = "/presentations/encrypted/";
+
+      function openPresentationStore() {
+        return new Promise((resolve, reject) => {
+          if (!("indexedDB" in window)) return reject(new Error("IndexedDB unavailable"));
+          const request = indexedDB.open(presentationStoreName, presentationStoreVersion);
+          request.onupgradeneeded = () => request.result.createObjectStore("keys");
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error || new Error("Could not open key store"));
+        });
+      }
+      function sameBytes(left, right) {
+        if (!left || !right || left.length !== right.length) return false;
+        return left.every((byte, index) => byte === right[index]);
+      }
+      async function readPresentationKey(salt) {
+        if (sessionPresentationKey && sameBytes(sessionPresentationSalt, salt)) return sessionPresentationKey;
+        const db = await openPresentationStore();
+        const stored = await new Promise((resolve, reject) => {
+          const request = db.transaction("keys", "readonly").objectStore("keys").get(presentationCacheId);
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+        db.close();
+        if (stored && sameBytes(stored.salt, salt)) {
+          sessionPresentationKey = stored.key;
+          sessionPresentationSalt = stored.salt;
+          return stored.key;
+        }
+        return null;
+      }
+      async function rememberPresentationKey(key, salt) {
+        sessionPresentationKey = key;
+        sessionPresentationSalt = Array.from(salt);
+        const db = await openPresentationStore();
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction("keys", "readwrite");
+          tx.objectStore("keys").put({ key, salt: Array.from(salt) }, presentationCacheId);
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error || new Error("Could not save key"));
+          tx.onabort = () => reject(tx.error || new Error("Could not save key"));
+        });
+        db.close();
+      }
+      async function forgetPresentationKey() {
+        sessionPresentationKey = null;
+        sessionPresentationSalt = null;
+        try {
+          const db = await openPresentationStore();
+          await new Promise((resolve, reject) => {
+            const tx = db.transaction("keys", "readwrite");
+            tx.objectStore("keys").delete(presentationCacheId);
+            tx.oncomplete = resolve;
+            tx.onerror = () => reject(tx.error);
+          });
+          db.close();
+        } catch (_) { /* The next unlock will ask for the password again. */ }
+      }
+      async function derivePresentationKey(password, salt, iterations) {
+        const material = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
+          material,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["decrypt"]
+        );
+      }
+      async function decryptPendingPresentation(key) {
+        const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: pendingPresentation.iv }, key, pendingPresentation.ciphertext);
+        return new Blob([plain], { type: "application/pdf" });
+      }
+      function showDecryptedPresentation(blob) {
+        if (activePresentationUrl) URL.revokeObjectURL(activePresentationUrl);
+        activePresentationUrl = URL.createObjectURL(blob);
+        presentationFrame.src = activePresentationUrl;
+        presentationFrame.hidden = false;
+        presentationForm.hidden = true;
+        presentationStatus.textContent = "Presentation unlocked. This browser remembers a non-extractable key for this encrypted set.";
+      }
+      async function openPresentation(presentationId) {
+        const talk = talks.find(item => item.presentation === presentationId);
+        if (!talk) return;
+        presentationDialogTitle.textContent = talk.title;
+        presentationStatus.textContent = "Loading encrypted presentation…";
+        presentationForm.hidden = true;
+        presentationFrame.hidden = true;
+        presentationFrame.removeAttribute("src");
+        presentationPassword.value = "";
+        pendingPresentation = null;
+        if (!presentationDialog.open) presentationDialog.showModal();
+        try {
+          const response = await fetch(`${presentationDirectory}${presentationId}.pdf.enc`, { cache: "no-store" });
+          if (!response.ok) {
+            presentationStatus.textContent = "This presentation has not been uploaded yet. Only encrypted PDFs can be published here.";
+            return;
+          }
+          const bytes = new Uint8Array(await response.arrayBuffer());
+          const magic = new TextDecoder().decode(bytes.subarray(0, 8));
+          if (magic !== presentationMagic || bytes.length < 56) throw new Error("Invalid encrypted file");
+          const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+          const salt = bytes.slice(8, 24);
+          const iv = bytes.slice(24, 36);
+          const iterations = view.getUint32(36, false);
+          if (iterations < 100000 || iterations > 2000000) throw new Error("Invalid key settings");
+          pendingPresentation = { salt, iv, iterations, ciphertext: bytes.slice(40) };
+          let key = null;
+          try { key = await readPresentationKey(salt); } catch (_) { /* Fall back to a fresh password prompt. */ }
+          if (key) {
+            try {
+              const blob = await decryptPendingPresentation(key);
+              showDecryptedPresentation(blob);
+              return;
+            } catch (_) { await forgetPresentationKey(); }
+          }
+          presentationStatus.textContent = "Enter the workshop password. After the first successful unlock, this browser will remember a non-extractable key.";
+          presentationForm.hidden = false;
+          presentationPassword.focus();
+        } catch (_) {
+          presentationStatus.textContent = "The encrypted presentation could not be read. Check that the published file is a valid ICAIF encrypted PDF.";
+        }
+      }
+      document.addEventListener("click", event => {
+        const link = event.target instanceof Element ? event.target.closest("a[data-presentation]") : null;
+        if (!link) return;
+        event.preventDefault();
+        openPresentation(link.dataset.presentation);
+      });
+      presentationForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (!pendingPresentation || !presentationPassword.value) return;
+        const password = presentationPassword.value;
+        presentationStatus.textContent = "Checking password and decrypting…";
+        const unlockButton = presentationForm.querySelector("button[type=submit]");
+        unlockButton.disabled = true;
+        try {
+          const key = await derivePresentationKey(password, pendingPresentation.salt, pendingPresentation.iterations);
+          const blob = await decryptPendingPresentation(key);
+          let remembered = false;
+          try { await rememberPresentationKey(key, pendingPresentation.salt); remembered = true; }
+          catch (_) { sessionPresentationKey = key; sessionPresentationSalt = Array.from(pendingPresentation.salt); }
+          showDecryptedPresentation(blob);
+          if (!remembered) presentationStatus.textContent = "Presentation unlocked for this page session. Browser storage is unavailable, so the password will be needed again after reload.";
+        } catch (_) {
+          presentationStatus.textContent = "Password not accepted, or the encrypted presentation is damaged. Please try again.";
+          presentationPassword.select();
+        } finally {
+          unlockButton.disabled = false;
+        }
+      });
+      presentationClose.addEventListener("click", () => presentationDialog.close());
+      presentationDialog.addEventListener("close", () => {
+        presentationFrame.removeAttribute("src");
+        presentationFrame.hidden = true;
+        presentationForm.hidden = true;
+        if (activePresentationUrl) URL.revokeObjectURL(activePresentationUrl);
+        activePresentationUrl = null;
+        pendingPresentation = null;
+      });
 
       function drawMarket(now) {
         const canvas = document.getElementById("market");
