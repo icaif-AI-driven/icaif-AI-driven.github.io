@@ -184,6 +184,81 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
+
+    /* Immersive glass programme panel and switchable committee view */
+    .program-board { position: relative; isolation: isolate; background: linear-gradient(145deg,rgba(7,23,38,.91),rgba(8,43,57,.88) 52%,rgba(12,47,50,.89)); border-color: rgba(193,235,222,.27); border-radius: 22px; color: #f3f7f4; box-shadow: 0 34px 100px rgba(0,0,0,.36), inset 0 1px rgba(255,255,255,.08); backdrop-filter: blur(18px); }
+    .program-board::before { content: ""; position: absolute; z-index: 0; inset: -32%; pointer-events: none; background: radial-gradient(ellipse at 25% 30%,rgba(65,197,180,.2),transparent 44%),radial-gradient(ellipse at 78% 68%,rgba(221,237,120,.14),transparent 42%),radial-gradient(ellipse at 68% 14%,rgba(239,115,88,.12),transparent 38%); background-size: 160% 160%; animation: board-aura 19s ease-in-out infinite alternate; }
+    .program-board::after { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: linear-gradient(112deg,transparent 15%,rgba(230,255,246,.055) 46%,transparent 62%); transform: translateX(-110%); animation: board-sweep 13s ease-in-out infinite; }
+    .program-view, .committee-view { position: relative; z-index: 1; min-height: 0; flex: 1; display: flex; flex-direction: column; }
+    .program-view[hidden], .committee-view[hidden] { display: none !important; }
+    .spotlight { min-height: 0; margin: 16px 18px 13px; padding: 22px 23px; border-color: rgba(94,222,200,.28); border-radius: 15px; background: linear-gradient(125deg,rgba(5,21,36,.87),rgba(11,52,66,.82) 65%,rgba(15,60,61,.82)); box-shadow: 0 18px 42px rgba(1,14,25,.22),inset 0 0 38px rgba(72,209,189,.06); }
+    .spotlight-title { min-height: 0; margin: 5px 0 3px; font-size: clamp(27px,2.35vw,38px); line-height: 1.08; letter-spacing: -.045em; font-weight: 760; }
+    .spotlight-time { font-size: 14px; }
+    .spotlight-speaker { color: rgba(235,246,240,.82); font-size: clamp(13px,1.05vw,15px); line-height: 1.45; }
+    .agenda-heading { padding: 1px 23px 9px; color: rgba(221,236,229,.65); font-size: 9px; }
+    .slide-count { color: var(--lime); font-size: 11px; }
+    .agenda-window { margin: 0 13px; padding: 0 8px 5px; scrollbar-color: rgba(220,237,120,.35) transparent; }
+    .agenda-row { grid-template-columns: 58px 1fr 9px; min-height: 47px; border-color: rgba(225,241,235,.12); opacity: .72; }
+    .agenda-row.active { min-height: 58px; background: linear-gradient(90deg,rgba(72,209,189,.15),rgba(220,237,120,.07)); box-shadow: inset 2px 0 0 var(--mint); }
+    .agenda-time { color: #a9ddce; font-size: 11px; }
+    .agenda-copy strong { color: rgba(241,247,243,.87); font-size: 12px; }
+    .agenda-row.active .agenda-copy strong { color: #fff; font-size: 13px; }
+    .agenda-copy span { color: #7bd6c4; font-size: 8px; }
+    .agenda-dot { border-color: rgba(153,207,194,.58); }
+    .agenda-row.active .agenda-dot { border-color: var(--lime); background: var(--lime); box-shadow: 0 0 0 4px rgba(220,237,120,.13); }
+    .poster-window { margin: 9px 18px 14px; border-color: rgba(128,209,190,.25); background: rgba(233,250,242,.08); }
+    .poster-window span { color: #8be0ce; }
+    .poster-window strong { color: rgba(242,248,244,.86); font-size: 10px; }
+    .board-footer { position: relative; z-index: 1; min-height: 42px; border-color: rgba(223,241,236,.14); color: rgba(223,238,230,.61); }
+    .board-footer kbd { border-color: rgba(216,238,227,.28); background: rgba(255,255,255,.08); color: #f4f8f3; }
+    .committee-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; padding: 29px 28px 20px; }
+    .committee-heading .board-kicker { color: #86dcca; font-size: 9px; }
+    .committee-heading h2 { margin: 7px 0 0; color: #f6faf7; font-size: clamp(29px,3vw,43px); line-height: 1.02; letter-spacing: -.06em; }
+    .committee-count { flex: 0 0 auto; padding-bottom: 5px; color: var(--lime); font: 700 11px ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing: .04em; }
+    .committee-grid { min-height: 0; flex: 1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-content: start; gap: 0 22px; margin: 0 15px; padding: 0 13px 14px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(220,237,120,.38) transparent; }
+    .committee-person { min-width: 0; min-height: 71px; display: flex; flex-direction: column; justify-content: center; padding: 10px 10px; border-top: 1px solid rgba(225,241,235,.14); transition: background .25s ease, transform .25s ease; }
+    .committee-person:hover { background: rgba(235,249,241,.06); transform: translateX(3px); }
+    .committee-person strong { color: #f5f8f5; font-size: clamp(14px,1.1vw,17px); line-height: 1.2; font-weight: 700; }
+    .committee-person span { margin-top: 5px; color: rgba(220,236,229,.65); font-size: clamp(10px,.83vw,12px); line-height: 1.3; }
+    @keyframes board-aura { from { transform: translate3d(-2%,1%,0) scale(.96); background-position: 0% 45%; } to { transform: translate3d(2%,-1%,0) scale(1.05); background-position: 100% 55%; } }
+    @keyframes board-sweep { 0%,34% { transform: translateX(-110%); } 70%,100% { transform: translateX(110%); } }
+    @media (max-height: 820px) and (min-width: 901px) {
+      .spotlight { margin: 9px 14px 8px; padding: 16px 18px; }
+      .spotlight-title { font-size: clamp(24px,2.2vw,33px); }
+      .spotlight-speaker { font-size: 13px; }
+      .agenda-row { min-height: 41px; }
+      .agenda-row.active { min-height: 49px; }
+      .committee-heading { padding-top: 21px; padding-bottom: 13px; }
+      .committee-person { min-height: 61px; }
+    }
+    @media (max-width: 900px) {
+      .program-board { height: 650px; }
+      .spotlight { margin: 14px 16px 12px; }
+      .spotlight-title { font-size: clamp(26px,4.4vw,35px); }
+      .spotlight-speaker { font-size: 14px; }
+      .committee-heading { padding: 24px 22px 16px; }
+      .committee-person strong { font-size: 16px; }
+      .committee-person span { font-size: 11px; }
+    }
+    @media (max-width: 520px) {
+      .program-board { height: 620px; }
+      .spotlight { margin: 12px 11px 10px; padding: 17px 15px; }
+      .spotlight-title { font-size: clamp(25px,6vw,31px); }
+      .spotlight-speaker { font-size: 13px; }
+      .agenda-heading { padding-left: 15px; padding-right: 15px; }
+      .agenda-window { margin: 0 8px; }
+      .agenda-row { grid-template-columns: 48px 1fr 8px; }
+      .agenda-copy strong { font-size: 11.5px; }
+      .committee-heading { padding: 22px 18px 14px; }
+      .committee-heading h2 { font-size: 31px; }
+      .committee-grid { grid-template-columns: 1fr; margin: 0 8px; padding: 0 9px 12px; }
+      .committee-person { min-height: 59px; }
+      .poster-window { margin-left: 11px; margin-right: 11px; }
+      .board-footer { padding: 0 12px; font-size: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .program-board::before, .program-board::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
   </style>
 </head>
 <body>
@@ -220,34 +295,50 @@
         <div class="conference-stamp"><b>Part of ICAIF '26</b><span>AI × Finance</span></div>
       </section>
 
-      <aside class="program-board" aria-label="Workshop programme">
-        <div class="board-head">
-          <div><span class="board-kicker">ICAIF '26 · Workshop programme</span><h2>One afternoon.<br />Many market perspectives.</h2></div>
-          <div class="board-date">Saturday<b>14:00 — 18:00 CET</b></div>
-        </div>
-        <div class="board-venue"><span class="room-chip">ROOM 1</span><strong>Bocconi University</strong><span>· Milan (IT)</span></div>
+      <aside class="program-board" aria-label="Workshop programme and scientific committee">
+        <section class="program-view" id="program-view" aria-label="Workshop programme">
+          <section class="spotlight" aria-label="Rotating programme highlight">
+            <span class="spotlight-label" id="spotlight-label">Welcome</span>
+            <span class="spotlight-time" id="spotlight-time">14:00</span>
+            <h3 class="spotlight-title" id="spotlight-title">Welcome and Opening Remarks</h3>
+            <span class="spotlight-speaker" id="spotlight-speaker">Workshop Organizing Committee</span>
+          </section>
 
-        <section class="spotlight" aria-label="Rotating programme highlight">
-          <span class="spotlight-label" id="spotlight-label">Welcome</span>
-          <span class="spotlight-time" id="spotlight-time">14:00</span>
-          <h3 class="spotlight-title" id="spotlight-title">Welcome and Opening Remarks</h3>
-          <span class="spotlight-speaker" id="spotlight-speaker">Workshop Organizing Committee</span>
+          <div class="agenda-heading"><span>Programme highlights</span><span class="slide-count" id="slide-count">01 / 09</span></div>
+          <div class="agenda-window" id="agenda-window" aria-label="Workshop talks">
+            <article class="agenda-row active" data-index="0"><time class="agenda-time">14:00</time><div class="agenda-copy"><span>Welcome</span><strong>Welcome and Opening Remarks</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="1"><time class="agenda-time">14:05</time><div class="agenda-copy"><span>Opening invited talk</span><strong>Lessons from Language Pretraining That Generalise to Order Books</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="2"><time class="agenda-time">14:45</time><div class="agenda-copy"><span>Contributed talk</span><strong>OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="3"><time class="agenda-time">15:10</time><div class="agenda-copy"><span>Contributed talk</span><strong>Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="4"><time class="agenda-time">15:35</time><div class="agenda-copy"><span>Contributed talk</span><strong>Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="5"><time class="agenda-time">16:00</time><div class="agenda-copy"><span>Coffee break</span><strong>Poster presentations · coffee break</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong>Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="7"><time class="agenda-time">16:55</time><div class="agenda-copy"><span>Contributed talk</span><strong>Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="8"><time class="agenda-time">17:20</time><div class="agenda-copy"><span>Closing invited talk</span><strong>When Proofs Are Abundant, What Is a Paper For?</strong></div><i class="agenda-dot"></i></article>
+          </div>
+          <div class="poster-window"><span>Poster session</span><strong>Also on display during lunch · 13:00–14:00<br />Coffee break · 16:00–16:30</strong></div>
         </section>
 
-        <div class="agenda-heading"><span>Programme highlights</span><span class="slide-count" id="slide-count">01 / 09</span></div>
-        <div class="agenda-window" id="agenda-window" aria-label="Workshop talks">
-          <article class="agenda-row active" data-index="0"><time class="agenda-time">14:00</time><div class="agenda-copy"><span>Welcome</span><strong>Welcome and Opening Remarks</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="1"><time class="agenda-time">14:05</time><div class="agenda-copy"><span>Opening invited talk</span><strong>Lessons from Language Pretraining That Generalise to Order Books</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="2"><time class="agenda-time">14:45</time><div class="agenda-copy"><span>Contributed talk</span><strong>OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="3"><time class="agenda-time">15:10</time><div class="agenda-copy"><span>Contributed talk</span><strong>Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="4"><time class="agenda-time">15:35</time><div class="agenda-copy"><span>Contributed talk</span><strong>Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="5"><time class="agenda-time">16:00</time><div class="agenda-copy"><span>Coffee break</span><strong>Poster presentations · coffee break</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong>Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="7"><time class="agenda-time">16:55</time><div class="agenda-copy"><span>Contributed talk</span><strong>Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</strong></div><i class="agenda-dot"></i></article>
-          <article class="agenda-row" data-index="8"><time class="agenda-time">17:20</time><div class="agenda-copy"><span>Closing invited talk</span><strong>When Proofs Are Abundant, What Is a Paper For?</strong></div><i class="agenda-dot"></i></article>
-        </div>
-        <div class="poster-window"><span>Poster session</span><strong>Also on display during lunch · 13:00–14:00<br />Coffee break · 16:00–16:30</strong></div>
-        <div class="board-footer"><span>Contributions · research · discussion</span><span>Pause <kbd>Space</kbd> · Fullscreen <kbd>F</kbd></span></div>
+        <section class="committee-view" id="committee-view" aria-label="Scientific committee" aria-hidden="true" hidden>
+          <div class="committee-heading">
+            <div><span class="board-kicker">People shaping the research</span><h2>Scientific<br />Committee</h2></div>
+            <span class="committee-count">11 MEMBERS</span>
+          </div>
+          <div class="committee-grid" role="list" aria-label="Scientific committee members">
+            <article class="committee-person" role="listitem"><strong>Paolo Barucca</strong><span>University College London</span></article>
+            <article class="committee-person" role="listitem"><strong>Mihai Cucuringu</strong><span>Oxford Man Institute &amp; UCLA</span></article>
+            <article class="committee-person" role="listitem"><strong>Fabrizio Lillo</strong><span>Scuola Normale Superiore</span></article>
+            <article class="committee-person" role="listitem"><strong>Giulia Livieri</strong><span>London School of Economics</span></article>
+            <article class="committee-person" role="listitem"><strong>Andrea Macrì</strong><span>Scuola Normale Superiore</span></article>
+            <article class="committee-person" role="listitem"><strong>Manuel Naviglio</strong><span>Scuola Normale Superiore</span></article>
+            <article class="committee-person" role="listitem"><strong>Andrea Prampolini</strong><span>Intesa Sanpaolo</span></article>
+            <article class="committee-person" role="listitem"><strong>Francesco Tarantelli</strong><span>Università di Bologna</span></article>
+            <article class="committee-person" role="listitem"><strong>Ioanna-Yvonni Tsaknaki</strong><span>Scuola Normale Superiore</span></article>
+            <article class="committee-person" role="listitem"><strong>Edoardo Vittori</strong><span>Intesa Sanpaolo</span></article>
+            <article class="committee-person" role="listitem"><strong>Stefan Zohren</strong><span>University of Oxford</span></article>
+          </div>
+        </section>
+        <div class="board-footer"><span id="view-switch-hint">S · Scientific committee</span><span>Pause <kbd>Space</kbd> · Fullscreen <kbd>F</kbd></span></div>
       </aside>
     </main>
 
@@ -285,12 +376,16 @@
       const progress = document.getElementById("progress-fill");
       const rotatingLine = document.getElementById("rotating-line");
       const stage = document.getElementById("stage");
+      const programView = document.getElementById("program-view");
+      const committeeView = document.getElementById("committee-view");
+      const viewSwitchHint = document.getElementById("view-switch-hint");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const phrases = ["Markets are changing. Let's understand how.", "Where AI meets the mechanics of finance.", "From order books to decentralized markets.", "Research, evidence, new perspectives."];
       const fullscreenButton = document.getElementById("fullscreen-toggle");
       const fullscreenLabel = document.getElementById("fullscreen-label");
       let active = 0;
       let phrase = 0;
+      let showingCommittee = false;
       let paused = false;
       let start = performance.now();
       let lastFrame = 0;
@@ -325,6 +420,15 @@
       fullscreenButton.addEventListener("click", toggleFullscreen);
       document.addEventListener("fullscreenchange", syncFullscreenButton);
       syncFullscreenButton();
+
+      function toggleCommitteeView() {
+        showingCommittee = !showingCommittee;
+        programView.hidden = showingCommittee;
+        committeeView.hidden = !showingCommittee;
+        programView.setAttribute("aria-hidden", String(showingCommittee));
+        committeeView.setAttribute("aria-hidden", String(!showingCommittee));
+        viewSwitchHint.textContent = showingCommittee ? "S · Return to programme" : "S · Scientific committee";
+      }
 
       function selectTalk(index) {
         active = index % talks.length;
@@ -413,8 +517,13 @@
       }
 
       document.addEventListener("keydown", event => {
+        const target = event.target;
+        const typing = target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
         if (event.key === "Escape" && stage.classList.contains("focus-mode")) {
           stage.classList.remove("focus-mode"); syncFullscreenButton();
+        }
+        if (event.key.toLowerCase() === "s" && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {
+          event.preventDefault(); toggleCommitteeView();
         }
         if (event.key.toLowerCase() === "f") {
           toggleFullscreen();
