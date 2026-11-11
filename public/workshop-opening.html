@@ -419,7 +419,7 @@
             <article class="committee-person" role="listitem"><strong>Stefan Zohren</strong><span>University of Oxford</span></article>
           </div>
         </section>
-        <div class="board-footer"><span id="view-switch-hint">S · Scientific committee</span><span>Pause <kbd>Space</kbd> · Fullscreen <kbd>F</kbd></span></div>
+        <div class="board-footer"><span id="view-switch-hint">S · Scientific committee</span><span>Pause <kbd>Space</kbd> · Fullscreen</span></div>
       </aside>
     </main>
 
@@ -841,9 +841,6 @@
         }
         if (event.key.toLowerCase() === "s" && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {
           event.preventDefault(); toggleCommitteeView();
-        }
-        if (event.key.toLowerCase() === "f") {
-          toggleFullscreen();
         }
         if (event.code === "Space" && !/INPUT|TEXTAREA|BUTTON/.test(document.activeElement?.tagName || "")) {
           event.preventDefault(); paused = !paused; stage.classList.toggle("paused", paused);
