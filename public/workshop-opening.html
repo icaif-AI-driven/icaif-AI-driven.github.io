@@ -25,6 +25,7 @@
     .texture { position: fixed; z-index: -2; inset: 0; opacity: .18; pointer-events: none; background-image: linear-gradient(rgba(193,225,221,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(193,225,221,.045) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(90deg, transparent 4%, #000 50%, #000); }
     #market { position: fixed; z-index: -1; inset: 0; width: 100%; height: 100%; opacity: .36; pointer-events: none; }
     .stage { min-height: 100svh; height: 100svh; display: grid; grid-template-rows: 66px minmax(0,1fr) 64px; padding: 0 clamp(24px, 4.4vw, 84px); }
+    .stage.focus-mode { position: fixed; z-index: 5; inset: 0; box-sizing: border-box; overflow-y: auto; background: rgba(5,23,25,.3); }
     .topbar { display: flex; align-items: center; gap: 25px; border-bottom: 1px solid rgba(223,241,236,.18); }
     .brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; font-weight: 750; font-size: 17px; letter-spacing: -.055em; }
     .brand-mark { width: 27px; height: 27px; display: grid; place-items: center; background: var(--lime); color: var(--night); font-size: 15px; }
@@ -133,11 +134,18 @@
       .poster-meta { grid-template-columns: .85fr 1.2fr; }
       .meta-item:last-child { display: none; }
     }
+    @media (min-width: 901px) {
+      .stage.focus-mode { grid-template-rows: 56px minmax(0,1fr) 51px; padding-inline: clamp(34px,6vw,116px); }
+      .stage.focus-mode h1 { font-size: clamp(60px,7vw,122px); }
+      .stage.focus-mode .program-board { height: calc(100dvh - 126px); max-height: none; }
+      .stage.focus-mode .spotlight-title { font-size: clamp(24px,2.05vw,32px); }
+    }
     @media (max-width: 900px) {
       html, body { height: auto; min-height: 100%; }
       body { overflow: auto; }
       .backdrop { position: fixed; }
       .stage { height: auto; min-height: 100svh; grid-template-rows: 58px auto 58px; padding: 0 20px; }
+      .stage.focus-mode { height: 100dvh; min-height: 100dvh; grid-template-rows: 58px auto 58px; }
       .topbar { gap: 12px; }
       .topbar-right { gap: 9px; font-size: 8px; }
       .live-state { display: none; }
@@ -291,7 +299,7 @@
       let animationFrame;
 
       function syncFullscreenButton() {
-        const isFullscreen = Boolean(document.fullscreenElement);
+        const isFullscreen = Boolean(document.fullscreenElement) || stage.classList.contains("focus-mode");
         fullscreenButton.setAttribute("aria-pressed", String(isFullscreen));
         fullscreenButton.setAttribute("aria-label", isFullscreen ? "Exit full screen" : "Enter full screen");
         fullscreenButton.title = isFullscreen ? "Exit full screen" : "Full screen";
@@ -300,11 +308,19 @@
 
       async function toggleFullscreen() {
         try {
-          if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
-          else await document.exitFullscreen?.();
+          if (stage.classList.contains("focus-mode") && !document.fullscreenElement) {
+            stage.classList.remove("focus-mode");
+          } else if (document.fullscreenElement) {
+            await document.exitFullscreen?.();
+          } else if (document.fullscreenEnabled && typeof document.documentElement.requestFullscreen === "function") {
+            await document.documentElement.requestFullscreen();
+          } else {
+            stage.classList.add("focus-mode");
+          }
         } catch (error) {
-          fullscreenButton.title = "Full screen is unavailable in this browser";
+          if (!document.fullscreenElement) stage.classList.add("focus-mode");
         }
+        syncFullscreenButton();
       }
       fullscreenButton.addEventListener("click", toggleFullscreen);
       document.addEventListener("fullscreenchange", syncFullscreenButton);
@@ -397,6 +413,9 @@
       }
 
       document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && stage.classList.contains("focus-mode")) {
+          stage.classList.remove("focus-mode"); syncFullscreenButton();
+        }
         if (event.key.toLowerCase() === "f") {
           toggleFullscreen();
         }
