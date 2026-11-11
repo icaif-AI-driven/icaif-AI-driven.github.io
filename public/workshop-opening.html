@@ -30,24 +30,29 @@
     .brand-mark { width: 27px; height: 27px; display: grid; place-items: center; background: var(--lime); color: var(--night); font-size: 15px; }
     .brand b { color: var(--coral); }
     .conference-name { color: rgba(235,244,239,.68); font-size: 10px; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
-    .topbar-right { display: flex; align-items: center; gap: 18px; margin-left: auto; font-size: 10px; font-weight: 650; letter-spacing: .11em; text-transform: uppercase; }
+    .topbar-right { display: flex; align-items: center; gap: 14px; margin-left: auto; font-size: 9px; font-weight: 650; letter-spacing: .11em; text-transform: uppercase; }
     .live-state { display: inline-flex; align-items: center; gap: 8px; color: #d8e3dd; }
     .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 5px rgba(72,209,189,.12); animation: breathe 2.2s ease-in-out infinite; }
-    .loop-label { padding: 7px 10px; border: 1px solid rgba(220,237,120,.48); color: var(--lime); }
+    .fullscreen-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 29px; padding: 5px 9px; border: 1px solid rgba(220,237,120,.52); border-radius: 5px; background: rgba(8,27,32,.28); color: var(--lime); cursor: pointer; font-family: inherit; font-size: 8px; font-weight: 750; line-height: 1; letter-spacing: .1em; text-transform: uppercase; transition: color .22s ease, background .22s ease, border-color .22s ease, transform .22s ease; }
+    .fullscreen-toggle:hover, .fullscreen-toggle[aria-pressed="true"] { border-color: var(--lime); background: var(--lime); color: var(--night); transform: translateY(-1px); }
+    .fullscreen-toggle svg { width: 13px; height: 13px; flex: 0 0 auto; transition: transform .28s ease; }
+    .fullscreen-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
     .main-grid { min-height: 0; display: grid; grid-template-columns: minmax(0,1.04fr) minmax(430px,.96fr); align-items: center; gap: clamp(26px,4.5vw,82px); padding: 26px 0 24px; }
-    .poster { position: relative; min-width: 0; padding: 14px 0 12px; }
+    .poster { position: relative; min-width: 0; padding: 14px 0 12px; isolation: isolate; }
+    .poster::before { content: ""; position: absolute; z-index: -1; inset: -28px -44px; pointer-events: none; background: radial-gradient(ellipse at 23% 54%, rgba(72,209,189,.16), transparent 57%), radial-gradient(ellipse at 72% 20%, rgba(239,115,88,.08), transparent 43%); background-size: 125% 125%; animation: poster-aurora 17s ease-in-out infinite alternate; }
+    .poster > * { position: relative; z-index: 1; }
     .poster-kicker, .micro-label { color: var(--lime); font-size: 10px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
-    .poster-kicker { display: flex; align-items: center; gap: 11px; }
+    .poster-kicker { display: flex; align-items: center; gap: 11px; animation: reveal-up .8s cubic-bezier(.2,.72,.2,1) both; }
     .poster-kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 5px rgba(239,115,88,.15); }
-    h1 { max-width: 820px; margin: 26px 0 13px; font-size: clamp(54px,6.4vw,112px); line-height: .89; letter-spacing: -.085em; font-weight: 760; }
-    h1 em { color: var(--lime); font-style: normal; }
-    .subtitle { max-width: 650px; margin: 0; color: #e2ece7; font-size: clamp(18px,2vw,29px); line-height: 1.16; font-weight: 540; letter-spacing: -.035em; }
-    .intro-copy { max-width: 600px; margin: 18px 0 0; color: rgba(227,238,233,.74); font-size: clamp(13px,1.12vw,16px); line-height: 1.65; }
-    .rotating-line { min-height: 32px; margin-top: 17px; display: flex; align-items: center; gap: 11px; color: var(--mint); font-size: 12px; font-weight: 700; letter-spacing: .035em; }
+    h1 { max-width: 820px; margin: 26px 0 13px; font-size: clamp(54px,6.4vw,112px); line-height: .89; letter-spacing: -.085em; font-weight: 760; animation: reveal-up .95s .08s cubic-bezier(.2,.72,.2,1) both; }
+    h1 em { background: linear-gradient(105deg, #e6f58a 4%, var(--lime) 44%, #8ee4d0 76%, #dced78 100%); background-size: 220% auto; color: transparent; background-clip: text; -webkit-background-clip: text; font-style: normal; filter: drop-shadow(0 0 18px rgba(220,237,120,.13)); animation: title-shimmer 11s ease-in-out infinite; }
+    .subtitle { max-width: 650px; margin: 0; color: #e2ece7; font-size: clamp(18px,2vw,29px); line-height: 1.16; font-weight: 540; letter-spacing: -.035em; animation: reveal-up .85s .2s cubic-bezier(.2,.72,.2,1) both; }
+    .intro-copy { max-width: 600px; margin: 18px 0 0; color: rgba(227,238,233,.74); font-size: clamp(13px,1.12vw,16px); line-height: 1.65; animation: reveal-up .85s .3s cubic-bezier(.2,.72,.2,1) both; }
+    .rotating-line { min-height: 32px; margin-top: 17px; display: flex; align-items: center; gap: 11px; color: var(--mint); font-size: clamp(12px,1vw,14px); font-weight: 720; letter-spacing: .015em; animation: reveal-up .85s .42s cubic-bezier(.2,.72,.2,1) both; }
     .rotating-line::before { content: ""; width: 31px; height: 1px; background: var(--mint); }
     .rotating-line span { transition: opacity .45s ease, transform .45s ease; }
     .rotating-line span.out { opacity: 0; transform: translateY(6px); }
-    .poster-meta { display: grid; grid-template-columns: .8fr 1.3fr 1fr; max-width: 720px; margin-top: 28px; border-top: 1px solid rgba(235,245,240,.28); }
+    .poster-meta { display: grid; grid-template-columns: .8fr 1.3fr 1fr; max-width: 720px; margin-top: 28px; border-top: 1px solid rgba(235,245,240,.28); animation: reveal-up .9s .5s cubic-bezier(.2,.72,.2,1) both; }
     .meta-item { min-width: 0; padding: 15px 15px 0 0; }
     .meta-item + .meta-item { padding-left: 15px; border-left: 1px solid rgba(235,245,240,.18); }
     .meta-item span { display: block; color: #9eb5ad; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
@@ -65,22 +70,23 @@
     .board-venue { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 9px 22px; border-top: 1px solid #e0e7ef; border-bottom: 1px solid #e0e7ef; color: #536880; font-size: 10px; font-weight: 600; }
     .board-venue strong { color: var(--navy); }
     .room-chip { display: inline-block; padding: 3px 6px; border-radius: 3px; background: #e5f4f1; color: #217c73; font-size: 8px; font-weight: 800; letter-spacing: .09em; }
-    .spotlight { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 10px 14px; align-items: end; min-height: 115px; margin: 14px 18px 10px; padding: 15px 17px; overflow: hidden; border-radius: 10px; background: linear-gradient(115deg, #0b1d33, #123f52); color: #fff; }
-    .spotlight::after { content: ""; position: absolute; top: -54px; right: -18px; width: 145px; height: 145px; border: 1px solid rgba(72,209,189,.45); border-radius: 50%; box-shadow: 0 0 0 20px rgba(72,209,189,.06), 0 0 0 40px rgba(72,209,189,.04); }
+    .spotlight { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr auto; gap: 11px 14px; align-items: end; min-height: 132px; margin: 14px 18px 10px; padding: 16px 18px; overflow: hidden; border: 1px solid rgba(72,209,189,.2); border-radius: 11px; background: linear-gradient(115deg, #09192d, #123f52 74%, #17505a); color: #fff; box-shadow: 0 10px 26px rgba(7,29,45,.17), inset 0 0 28px rgba(72,209,189,.04); }
+    .spotlight::before { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background: linear-gradient(108deg, transparent 16%, rgba(255,255,255,.09) 44%, transparent 58%); transform: translateX(-115%); animation: spotlight-sweep 8.5s ease-in-out infinite; }
+    .spotlight::after { content: ""; position: absolute; z-index: 0; top: -54px; right: -18px; width: 145px; height: 145px; border: 1px solid rgba(72,209,189,.45); border-radius: 50%; box-shadow: 0 0 0 20px rgba(72,209,189,.06), 0 0 0 40px rgba(72,209,189,.04); animation: orbit-glow 9s ease-in-out infinite; }
     .spotlight-label { position: relative; z-index: 1; color: #79ddcc; font-size: 8px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
     .spotlight-time { position: relative; z-index: 1; color: var(--lime); font: 700 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
-    .spotlight-title { position: relative; z-index: 1; grid-column: 1 / -1; max-width: 95%; min-height: 42px; margin: 0; font-size: clamp(16px,1.55vw,21px); line-height: 1.2; letter-spacing: -.035em; font-weight: 700; transition: opacity .3s ease, transform .3s ease; }
+    .spotlight-title { position: relative; z-index: 1; grid-column: 1 / -1; max-width: 100%; min-height: 58px; margin: 0; font-size: clamp(22px,1.9vw,29px); line-height: 1.12; letter-spacing: -.04em; font-weight: 730; text-wrap: pretty; transition: opacity .3s ease, transform .3s ease; }
     .spotlight-title.fade { opacity: 0; transform: translateY(5px); }
-    .spotlight-speaker { position: relative; z-index: 1; grid-column: 1 / -1; color: rgba(231,242,238,.74); font-size: 10px; line-height: 1.35; transition: opacity .3s ease; }
+    .spotlight-speaker { position: relative; z-index: 1; grid-column: 1 / -1; color: rgba(231,242,238,.84); font-size: 11px; line-height: 1.4; letter-spacing: .015em; transition: opacity .3s ease; }
     .agenda-heading { display: flex; justify-content: space-between; align-items: center; padding: 1px 21px 8px; color: #6a7e93; font-size: 8px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
     .slide-count { color: #1e8e82; font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
     .agenda-window { min-height: 0; flex: 1; margin: 0 10px; padding: 0 8px 4px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #bed4d4 transparent; }
-    .agenda-row { position: relative; display: grid; grid-template-columns: 52px 1fr 9px; gap: 10px; align-items: center; min-height: 43px; padding: 6px 9px; border-top: 1px solid #e2e8ee; opacity: .63; transition: background .4s ease, opacity .4s ease, transform .4s ease, min-height .4s ease; }
-    .agenda-row.active { min-height: 51px; border-radius: 6px; background: #e9f5f2; opacity: 1; transform: translateX(2px); }
+    .agenda-row { position: relative; display: grid; grid-template-columns: 52px 1fr 9px; gap: 10px; align-items: center; min-height: 44px; padding: 6px 9px; border-top: 1px solid #e2e8ee; opacity: .65; transition: background .4s ease, opacity .4s ease, transform .4s ease, min-height .4s ease; }
+    .agenda-row.active { min-height: 55px; border-radius: 6px; background: linear-gradient(90deg,#e3f4ef,#f2f8f6); opacity: 1; transform: translateX(2px); box-shadow: inset 2px 0 0 #39a99b; }
     .agenda-time { color: #28435a; font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
     .agenda-copy { min-width: 0; }
-    .agenda-copy strong { display: block; overflow: hidden; color: #20374e; font-size: 10px; line-height: 1.28; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
-    .agenda-row.active .agenda-copy strong { white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .agenda-copy strong { display: block; overflow: hidden; color: #20374e; font-size: 11px; line-height: 1.3; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .agenda-row.active .agenda-copy strong { white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 11.5px; }
     .agenda-copy span { display: block; margin-bottom: 2px; color: #25887e; font-size: 7px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
     .agenda-dot { width: 7px; height: 7px; border: 1px solid #70a9a2; border-radius: 50%; background: transparent; }
     .agenda-row.active .agenda-dot { border-color: #2aa798; background: #2aa798; box-shadow: 0 0 0 4px rgba(42,167,152,.12); }
@@ -92,24 +98,30 @@
     .bottom-bar { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 22px; border-top: 1px solid rgba(223,241,236,.18); }
     .bottom-label { color: #a7b9b2; font-size: 8px; font-weight: 800; letter-spacing: .15em; white-space: nowrap; }
     .ticker-window { min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
-    .ticker-track { display: flex; width: max-content; align-items: center; animation: ticker 38s linear infinite; }
+    .ticker-track { display: flex; width: max-content; align-items: center; animation: ticker 32s linear infinite; }
     .ticker-group { display: flex; align-items: center; gap: 27px; padding-right: 27px; color: #e8f0ec; font-size: 10px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
     .ticker-group span::before { content: "✳"; margin-right: 27px; color: var(--mint); font-size: 9px; }
-    .progress-wrap { display: flex; align-items: center; gap: 8px; color: var(--lime); font: 700 8px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
-    .progress-track { width: clamp(55px,7vw,105px); height: 2px; overflow: hidden; background: rgba(220,237,120,.2); }
-    .progress-fill { width: 100%; height: 100%; background: var(--lime); transform: scaleX(0); transform-origin: left center; }
+    .progress-wrap { display: flex; align-items: center; justify-self: end; }
+    .progress-track { width: clamp(64px,8vw,112px); height: 2px; overflow: hidden; border-radius: 5px; background: rgba(220,237,120,.2); }
+    .progress-fill { width: 100%; height: 100%; border-radius: 5px; background: linear-gradient(90deg,var(--mint),var(--lime)); box-shadow: 0 0 10px rgba(220,237,120,.6); transform: scaleX(0); transform-origin: left center; }
     .stage.paused *, .stage.paused *::before, .stage.paused *::after { animation-play-state: paused !important; }
     .stage.paused .live-dot { opacity: .45; }
     @keyframes slow-drift { from { transform: scale(1) translate3d(0,0,0); } to { transform: scale(1.09) translate3d(-1.1%,.4%,0); } }
     @keyframes breathe { 0%,100% { opacity: .7; box-shadow: 0 0 0 4px rgba(72,209,189,.1); } 50% { opacity: 1; box-shadow: 0 0 0 7px rgba(72,209,189,.04); } }
     @keyframes ticker { to { transform: translateX(-50%); } }
+    @keyframes reveal-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes poster-aurora { from { opacity: .5; background-position: 0% 50%; } to { opacity: 1; background-position: 100% 45%; } }
+    @keyframes title-shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @keyframes spotlight-sweep { 0%,28% { transform: translateX(-115%); } 62%,100% { transform: translateX(115%); } }
+    @keyframes orbit-glow { 0%,100% { opacity: .55; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.07); } }
     @media (max-height: 820px) and (min-width: 901px) {
       .stage { grid-template-rows: 56px minmax(0,1fr) 51px; }
       .main-grid { padding: 14px 0; gap: 34px; }
       .program-board { height: calc(100svh - 126px); min-height: 470px; }
-      .spotlight { min-height: 96px; margin-top: 9px; margin-bottom: 7px; padding: 11px 14px; }
+      .spotlight { min-height: 116px; margin-top: 9px; margin-bottom: 7px; padding: 12px 15px; }
+      .spotlight-title { font-size: clamp(20px,1.85vw,26px); }
       .agenda-row { min-height: 38px; }
-      .agenda-row.active { min-height: 45px; }
+      .agenda-row.active { min-height: 47px; }
       .poster-window { margin-top: 5px; margin-bottom: 8px; padding: 7px 10px; }
       .poster-meta { margin-top: 21px; }
     }
@@ -143,7 +155,8 @@
     @media (max-width: 520px) {
       .stage { padding: 0 15px; }
       .brand { font-size: 15px; }
-      .loop-label { padding: 6px 7px; font-size: 7px; }
+      .fullscreen-toggle { width: 30px; min-height: 29px; padding: 6px; }
+      .fullscreen-toggle span { display: none; }
       .poster-kicker { font-size: 8px; }
       h1 { font-size: clamp(46px,12vw,62px); }
       .subtitle { font-size: 18px; }
@@ -175,7 +188,13 @@
     <header class="topbar">
       <div class="brand"><span class="brand-mark">I</span><span>ICAIF <b>'26</b></span></div>
       <div class="conference-name">7th ACM International Conference on AI in Finance</div>
-      <div class="topbar-right"><span class="live-state"><i class="live-dot"></i> Opening visuals</span><span class="loop-label">5 min autonomous loop</span></div>
+      <div class="topbar-right">
+        <span class="live-state"><i class="live-dot"></i> Opening visuals</span>
+        <button class="fullscreen-toggle" id="fullscreen-toggle" type="button" aria-label="Enter full screen" aria-pressed="false" title="Full screen">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 3H3v4M13 3h4v4M17 13v4h-4M3 13v4h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="fullscreen-label">Full screen</span>
+        </button>
+      </div>
     </header>
 
     <main class="main-grid">
@@ -184,7 +203,7 @@
         <h1>AI-Driven<br /><em>Market<br />Microstructure</em></h1>
         <p class="subtitle">in Centralized and Decentralized Finance</p>
         <p class="intro-copy">Artificial intelligence is reshaping trading, liquidity, price discovery and market design. Meet the research connecting these questions across traditional and decentralized markets.</p>
-        <div class="rotating-line"><span id="rotating-line">AI · Markets · New perspectives</span></div>
+        <div class="rotating-line"><span id="rotating-line">Markets are changing. Let's understand how.</span></div>
         <div class="poster-meta">
           <div class="meta-item"><span>Date</span><strong>14 Nov 2026</strong></div>
           <div class="meta-item"><span>Venue</span><strong>Room 1 · Bocconi University<br />Milan, Italy</strong></div>
@@ -232,7 +251,7 @@
           <div class="ticker-group" aria-hidden="true"><span>AI agents for trading</span><span>Liquidity &amp; market making</span><span>Price discovery</span><span>Optimal execution</span><span>DeFi microstructure</span><span>Market design</span><span>Order books</span></div>
         </div>
       </div>
-      <div class="progress-wrap"><span>5:00</span><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div><span>LOOP</span></div>
+      <div class="progress-wrap" aria-hidden="true"><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div>
     </footer>
   </div>
 
@@ -259,7 +278,9 @@
       const rotatingLine = document.getElementById("rotating-line");
       const stage = document.getElementById("stage");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const phrases = ["AI · Markets · New perspectives", "Liquidity · Discovery · Design", "From order books to DeFi", "Research meets practice"];
+      const phrases = ["Markets are changing. Let's understand how.", "Where AI meets the mechanics of finance.", "From order books to decentralized markets.", "Research, evidence, new perspectives."];
+      const fullscreenButton = document.getElementById("fullscreen-toggle");
+      const fullscreenLabel = document.getElementById("fullscreen-label");
       let active = 0;
       let phrase = 0;
       let paused = false;
@@ -268,6 +289,26 @@
       let nextTalk;
       let nextPhrase;
       let animationFrame;
+
+      function syncFullscreenButton() {
+        const isFullscreen = Boolean(document.fullscreenElement);
+        fullscreenButton.setAttribute("aria-pressed", String(isFullscreen));
+        fullscreenButton.setAttribute("aria-label", isFullscreen ? "Exit full screen" : "Enter full screen");
+        fullscreenButton.title = isFullscreen ? "Exit full screen" : "Full screen";
+        fullscreenLabel.textContent = isFullscreen ? "Exit" : "Full screen";
+      }
+
+      async function toggleFullscreen() {
+        try {
+          if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+          else await document.exitFullscreen?.();
+        } catch (error) {
+          fullscreenButton.title = "Full screen is unavailable in this browser";
+        }
+      }
+      fullscreenButton.addEventListener("click", toggleFullscreen);
+      document.addEventListener("fullscreenchange", syncFullscreenButton);
+      syncFullscreenButton();
 
       function selectTalk(index) {
         active = index % talks.length;
@@ -357,8 +398,7 @@
 
       document.addEventListener("keydown", event => {
         if (event.key.toLowerCase() === "f") {
-          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
-          else document.exitFullscreen?.();
+          toggleFullscreen();
         }
         if (event.code === "Space" && !/INPUT|TEXTAREA|BUTTON/.test(document.activeElement?.tagName || "")) {
           event.preventDefault(); paused = !paused; stage.classList.toggle("paused", paused);
