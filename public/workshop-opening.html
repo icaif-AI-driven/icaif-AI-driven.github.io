@@ -305,6 +305,11 @@
     @media (prefers-reduced-motion: reduce) {
       .program-board::before, .program-board::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     }
+    /* Keep the final glyph of the large title clear of the gradient edge */
+    .poster h1 em { letter-spacing: -.07em; padding-right: .07em; }
+    @media (max-width: 360px) {
+      .poster h1 em { letter-spacing: -.078em; padding-right: .03em; }
+    }
   </style>
 </head>
 <body>
