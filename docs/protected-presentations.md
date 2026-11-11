@@ -16,7 +16,7 @@ Place all seven talk PDFs in `private-presentations/` using these names:
 
 Then run `npm run encrypt:presentations` from the project root. The command asks for a password without echoing it, requires a 20 character minimum, and writes the encrypted outputs to `public/presentations/encrypted/`. It uses AES-256-GCM with PBKDF2-SHA-256 and 600,000 iterations. Each run encrypts the files as one set with a shared salt and distinct random nonces.
 
-Commit only the generated `.pdf.enc` files. The browser asks for the password once, decrypts the selected presentation locally, and stores a non-extractable derived key in IndexedDB for that browser profile. The password itself is neither stored nor sent to GitHub. Clearing the browser's site data or using another browser/device requires entering it again.
+Commit only the generated `.pdf.enc` files. The current demo asks for the passphrase when you open the sample and keeps it only in memory; it never stores or sends it. The encrypted real presentation set is not uploaded yet. When the real PDFs are provided, they can be encrypted with a separate strong workshop passphrase and decrypted locally in the browser. Never reuse the public demo passphrase for real talks.
 
 Anyone who obtains both the encrypted files and the password can decrypt them. Use a strong password and distribute it to workshop participants through a separate channel.
 
