@@ -259,6 +259,52 @@
     @media (prefers-reduced-motion: reduce) {
       .program-board::before, .program-board::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     }
+
+    /* Larger, brighter market canvas and a slow-shifting color wash */
+    .backdrop { opacity: .79; filter: saturate(.92) brightness(1.08); }
+    .shade { background: linear-gradient(90deg,rgba(5,23,25,.82) 0%,rgba(5,23,25,.70) 36%,rgba(8,27,38,.51) 68%,rgba(7,24,35,.60) 100%),linear-gradient(0deg,rgba(4,19,22,.79),transparent 48%),linear-gradient(130deg,rgba(38,116,111,.12),transparent 56%); }
+    .texture { opacity: .28; background-image: radial-gradient(ellipse 42% 34% at 19% 30%,rgba(80,190,173,.11),transparent 72%),radial-gradient(ellipse 46% 38% at 82% 75%,rgba(239,115,88,.075),transparent 72%); background-size: 100% 100%; mask-image: none; }
+    #market { opacity: .50; }
+    .main-grid { grid-template-columns: minmax(0,.9fr) minmax(520px,1.1fr); gap: clamp(28px,3.25vw,62px); }
+    h1 { font-size: clamp(54px,5.15vw,102px); }
+    .program-board { height: min(860px,calc(100svh - 130px)); border-color: rgba(166,245,219,.4); background: linear-gradient(135deg,rgba(10,43,62,.94),rgba(8,66,79,.92) 47%,rgba(48,73,53,.91)); box-shadow: 0 38px 110px rgba(0,0,0,.39),0 0 44px rgba(65,197,180,.12),inset 0 1px rgba(255,255,255,.12); }
+    .program-board::before { background: radial-gradient(ellipse at 18% 22%,rgba(65,221,197,.32),transparent 43%),radial-gradient(ellipse at 82% 70%,rgba(220,237,120,.25),transparent 41%),radial-gradient(ellipse at 72% 12%,rgba(239,115,88,.2),transparent 37%),radial-gradient(ellipse at 50% 92%,rgba(74,122,227,.16),transparent 44%); background-size: 180% 180%; animation: board-aura 16s ease-in-out infinite alternate; }
+    .program-board::after { background: linear-gradient(112deg,transparent 12%,rgba(225,255,239,.1) 45%,transparent 62%); animation-duration: 10s; }
+    .spotlight { border-color: rgba(112,242,212,.42); background: linear-gradient(125deg,rgba(8,44,61,.92),rgba(12,88,91,.87) 58%,rgba(86,89,46,.83)); box-shadow: 0 20px 50px rgba(0,0,0,.23),0 0 34px rgba(68,210,186,.14),inset 0 1px rgba(255,255,255,.12); }
+    .spotlight::after { border-color: rgba(220,237,120,.54); box-shadow: 0 0 0 20px rgba(72,209,189,.09),0 0 0 40px rgba(220,237,120,.055); }
+    .spotlight-title { font-size: clamp(29px,2.5vw,41px); text-shadow: 0 2px 20px rgba(0,0,0,.2); }
+    .spotlight-speaker { color: #e5f3eb; font-size: clamp(14px,1.12vw,16px); }
+    @keyframes board-aura {
+      0% { background-position: 0% 42%; filter: hue-rotate(-18deg) saturate(1.08); opacity: .72; }
+      48% { background-position: 72% 62%; filter: hue-rotate(27deg) saturate(1.28); opacity: 1; }
+      100% { background-position: 100% 34%; filter: hue-rotate(62deg) saturate(1.17); opacity: .82; }
+    }
+    @media (min-width: 1101px) and (max-width: 1400px) {
+      .main-grid { grid-template-columns: minmax(0,.88fr) minmax(480px,1.12fr); gap: clamp(24px,2.8vw,42px); }
+      h1 { font-size: clamp(48px,5.2vw,74px); }
+      .spotlight-title { font-size: clamp(28px,2.5vw,36px); }
+    }
+    @media (min-width: 901px) and (max-width: 1100px) {
+      .main-grid { grid-template-columns: minmax(0,.86fr) minmax(460px,1.14fr); gap: 22px; }
+      h1 { font-size: clamp(44px,5.2vw,61px); }
+      .spotlight-title { font-size: clamp(27px,2.5vw,34px); }
+    }
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .program-board { height: 650px; }
+      .spotlight-title { font-size: clamp(27px,4.6vw,37px); }
+    }
+    @media (max-width: 520px) {
+      .program-board { height: 620px; }
+      .spotlight-title { font-size: clamp(26px,6.2vw,33px); }
+    }
+    @media (max-height: 820px) and (min-width: 901px) {
+      .program-board { height: calc(100svh - 126px); }
+      .spotlight-title { font-size: clamp(25px,2.3vw,35px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .program-board::before, .program-board::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
   </style>
 </head>
 <body>
@@ -469,17 +515,20 @@
       function drawMarket(now) {
         const canvas = document.getElementById("market");
         const context = canvas.getContext("2d");
-        let width = 0, height = 0, ratio = 1, points = [];
+        let width = 0, height = 0, ratio = 1, points = [], agents = [];
+        const agentAnchors = [[.1,.74],[.22,.52],[.34,.75],[.46,.52],[.58,.73],[.7,.49],[.82,.72],[.92,.53]];
         function resize() {
           ratio = Math.min(window.devicePixelRatio || 1, 1.6);
           width = window.innerWidth; height = window.innerHeight;
           canvas.width = Math.floor(width * ratio); canvas.height = Math.floor(height * ratio);
           context.setTransform(ratio,0,0,ratio,0,0);
           points = Array.from({length: Math.max(20, Math.round(width / 50))}, (_,i) => ({x: i * (width / Math.max(20,Math.round(width / 50))), y: height * (.55 + Math.random() * .25), speed: .22 + Math.random() * .45, size: 1 + Math.random() * 2}));
+          agents = agentAnchors.map(([ax,ay],i) => ({ax,ay,phase:i*.91,speed:.52+(i%3)*.13,index:i}));
         }
         window.addEventListener("resize", resize, {passive:true}); resize();
         function frame(timestamp) {
-          if (paused || document.hidden) { animationFrame = requestAnimationFrame(frame); return; }
+          if (paused || document.hidden) { if (!reduceMotion) animationFrame = requestAnimationFrame(frame); return; }
+          if (reduceMotion && lastFrame > 0) return;
           if (timestamp - lastFrame < 42 && !reduceMotion) { animationFrame = requestAnimationFrame(frame); return; }
           lastFrame = timestamp;
           context.clearRect(0,0,width,height);
@@ -509,9 +558,40 @@
             context.beginPath(); context.arc(point.x,point.y,point.size,0,Math.PI*2);
             context.fillStyle = i % 2 ? "rgba(220,237,120,.6)" : "rgba(72,209,189,.65)"; context.fill();
           });
+          const nodes = agents.map(agent => ({
+            x: width * agent.ax + Math.sin(timestamp * .00023 * agent.speed + agent.phase) * width * .013,
+            y: height * agent.ay + Math.cos(timestamp * .00031 * agent.speed + agent.phase) * height * .018,
+            index: agent.index
+          }));
+          context.save();
+          context.setLineDash([2,7]);
+          nodes.forEach((node,i) => {
+            const peerIndex = (i + 1) % nodes.length;
+            const peer = nodes[peerIndex];
+            context.beginPath(); context.moveTo(node.x,node.y); context.lineTo(peer.x,peer.y);
+            context.strokeStyle = i % 2 ? "rgba(105,224,203,.2)" : "rgba(220,237,120,.16)"; context.lineWidth = 1; context.stroke();
+            const flow = (timestamp * .00012 + i * .17) % 1;
+            context.beginPath(); context.arc(node.x + (peer.x-node.x)*flow,node.y + (peer.y-node.y)*flow,2,0,Math.PI*2);
+            context.fillStyle = i % 2 ? "rgba(129,245,215,.9)" : "rgba(232,244,147,.9)"; context.fill();
+            if (i % 2 === 0) {
+              const pricePoint = points[Math.min(points.length-1,Math.round(agentAnchors[i][0] * (points.length-1)))];
+              context.beginPath(); context.moveTo(node.x,node.y); context.lineTo(pricePoint.x,pricePoint.y);
+              context.strokeStyle = "rgba(126,219,202,.12)"; context.lineWidth = .8; context.stroke();
+            }
+          });
+          nodes.forEach(node => {
+            const accent = node.index % 3 === 0 ? "rgba(125,241,211,.95)" : node.index % 3 === 1 ? "rgba(231,242,141,.94)" : "rgba(255,151,125,.92)";
+            context.beginPath(); context.arc(node.x,node.y,9,0,Math.PI*2); context.strokeStyle = accent.replace(/\.\d+\)/,".24)"); context.lineWidth = 1; context.stroke();
+            context.fillStyle = "rgba(5,27,36,.92)"; context.fillRect(node.x-5,node.y-4,10,8);
+            context.strokeStyle = accent; context.lineWidth = 1; context.strokeRect(node.x-5,node.y-4,10,8);
+            context.fillStyle = accent; context.fillRect(node.x-2.5,node.y-1,1.5,1.5); context.fillRect(node.x+1,node.y-1,1.5,1.5);
+            context.beginPath(); context.moveTo(node.x,node.y-4); context.lineTo(node.x,node.y-7); context.stroke();
+            context.beginPath(); context.arc(node.x,node.y-7,1.2,0,Math.PI*2); context.fill();
+          });
+          context.restore();
           const elapsed = ((timestamp - start) % 300000) / 300000;
           progress.style.transform = `scaleX(${elapsed})`;
-          animationFrame = requestAnimationFrame(frame);
+          if (!reduceMotion) animationFrame = requestAnimationFrame(frame);
         }
         animationFrame = requestAnimationFrame(frame);
       }
