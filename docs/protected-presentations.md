@@ -19,8 +19,3 @@ Then run `npm run encrypt:presentations` from the project root. The command asks
 Commit only the generated `.pdf.enc` files. The current demo asks for the passphrase when you open the sample and keeps it only in memory; it never stores or sends it. The encrypted real presentation set is not uploaded yet. When the real PDFs are provided, they can be encrypted with a separate strong workshop passphrase and decrypted locally in the browser. Never reuse the public demo passphrase for real talks.
 
 Anyone who obtains both the encrypted files and the password can decrypt them. Use a strong password and distribute it to workshop participants through a separate channel.
-
-
-## Public encryption demo
-
-The site includes a synthetic encrypted sample at `public/presentations/encrypted/demo-encrypted-talk.pdf.enc`. It contains no talk or personal data and exists only to verify the browser-side unlock flow. Its public test passphrase is `ICAIF-demo-only-2026-TEST-ACCESS`; never reuse it for real talks. The actual talk PDFs remain local in the ignored `private-presentations/` folder until encrypted with the private workshop passphrase. Distribute that real passphrase separately from the website.
