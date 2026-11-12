@@ -12,43 +12,6 @@
     <link rel="stylesheet" href="/program.css?v=venue-20261102" />
     <link rel="stylesheet" href="/interaction.css" />
 
-    <style>
-      .protected-section { padding: 92px 0; background: var(--deep); color: #eaf1ed; }
-      .protected-section .section-intro { max-width: 760px; margin-bottom: 30px; }
-      .protected-section .kicker, .protected-label { color: var(--lime); }
-      .protected-section .section-intro h2 { color: #fff; }
-      .protected-section .section-intro h2 span { color: var(--lime); }
-      .protected-section .section-note { color: #c5d3cd; }
-      .protected-card { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 30px; border: 1px solid rgba(220,237,120,.36); background: rgba(255,255,255,.045); }
-      .protected-card h3 { margin: 10px 0 7px; color: #fff; font: 600 24px/1.2 'Space Grotesk', sans-serif; }
-      .protected-card p { max-width: 650px; margin: 8px 0; color: #c5d3cd; }
-      .protected-label { font-size: 10px; font-weight: 700; letter-spacing: .13em; }
-      .demo-hint { font-size: 13px; }
-      .demo-hint code { color: var(--lime); font-size: 13px; overflow-wrap: anywhere; }
-      .demo-hint small { color: #a8bcb4; }
-      .protected-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 12px 16px; border: 0; background: var(--lime); color: var(--deep); font: 700 13px 'DM Sans', sans-serif; text-decoration: none; cursor: pointer; }
-      .protected-button:hover { background: #e7f3a0; }
-      .protected-button:focus-visible, .dialog-close:focus-visible, .passphrase-entry input:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-      .protected-dialog { width: min(600px, calc(100% - 32px)); max-width: none; padding: 0; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
-      .protected-dialog::backdrop { background: rgba(7,22,18,.76); backdrop-filter: blur(3px); }
-      .protected-dialog-inner { position: relative; padding: 36px; }
-      .protected-dialog-inner h2 { margin: 8px 34px 10px 0; font: 600 28px/1.1 'Space Grotesk', sans-serif; }
-      .protected-dialog-inner > p:not(.protected-label) { color: var(--muted); font-size: 14px; }
-      .protected-dialog .protected-label { color: var(--green); }
-      .dialog-close { position: absolute; top: 14px; right: 18px; border: 0; background: transparent; color: var(--ink); font-size: 28px; cursor: pointer; }
-      #demo-unlock-form label { display: block; margin: 20px 0 7px; font-size: 12px; font-weight: 700; }
-      .passphrase-entry { display: flex; gap: 10px; }
-      .passphrase-entry input { flex: 1; min-width: 0; padding: 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; }
-      .demo-status { min-height: 24px; margin: 10px 0 0; color: var(--coral); font-size: 13px; }
-      .demo-ready { padding-top: 4px; }
-      .demo-ready p { color: var(--green); font-size: 14px; }
-      @media (max-width: 640px) {
-        .protected-section { padding: 68px 0; }
-        .protected-card { align-items: flex-start; flex-direction: column; padding: 22px; }
-        .protected-dialog-inner { padding: 28px 22px; }
-        .passphrase-entry { align-items: stretch; flex-direction: column; }
-      }
-    </style>
 
   </head>
   <body>
@@ -58,7 +21,7 @@
         <a class="brand" href="#home"><span class="brand-symbol">I</span><span>ICAIF <b>'26</b></span></a>
         <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
         <nav aria-label="Main navigation">
-          <a href="#about">About</a><a href="#topics">Topics</a><a href="#dates">Important dates</a><a href="#program">Program</a><a href="#presentations">Presentations</a><a href="#people">People</a><a href="#submit">Submissions closed</a>
+          <a href="#about">About</a><a href="#topics">Topics</a><a href="#dates">Important dates</a><a href="#program">Program</a><a href="#people">People</a><a href="#submit">Submissions closed</a>
         </nav>
         <a class="header-link" href="https://icaif2026.org/" target="_blank" rel="noreferrer">ICAIF 2026 <span>↗</span></a>
       </div>
@@ -147,45 +110,6 @@
         </div>
       </section>
 
-
-      <section id="presentations" class="section protected-section">
-        <div class="container">
-          <div class="section-intro reveal">
-            <p class="kicker">Encrypted access · browser-side demo</p>
-            <h2>Protected <span>presentations.</span></h2>
-            <p class="section-note">This temporary sample checks the encrypted-PDF flow. The file contains no talk material; the real presentations can be added when the PDFs are ready.</p>
-          </div>
-          <article class="protected-card reveal">
-            <div>
-              <span class="protected-label">SYNTHETIC SAMPLE · AES-256-GCM</span>
-              <h3>ICAIF 2026 encrypted demo</h3>
-              <p>The encrypted file is fetched from the site and decrypted only in your browser. The passphrase is not sent or saved.</p>
-              <p class="demo-hint">Public demo passphrase: <code>ICAIF-demo-only-2026-TEST-ACCESS</code><br /><small>For this sample only. A different passphrase will protect the real talk PDFs.</small></p>
-            </div>
-            <button class="protected-button" id="open-demo-presentation" type="button">Unlock demo PDF <span>↗</span></button>
-          </article>
-          <dialog class="protected-dialog" id="demo-presentation-dialog" aria-labelledby="demo-dialog-title">
-            <div class="protected-dialog-inner">
-              <button class="dialog-close" id="close-demo-dialog" type="button" aria-label="Close">×</button>
-              <p class="protected-label">LOCAL DECRYPTION</p>
-              <h2 id="demo-dialog-title">Open the encrypted sample</h2>
-              <p>Enter the demo passphrase. Decryption runs in this browser; only the encrypted file is downloaded from the site.</p>
-              <form id="demo-unlock-form">
-                <label for="demo-passphrase">Passphrase</label>
-                <div class="passphrase-entry">
-                  <input id="demo-passphrase" name="passphrase" type="password" autocomplete="current-password" required />
-                  <button class="protected-button" id="demo-unlock-submit" type="submit">Decrypt</button>
-                </div>
-              </form>
-              <p id="demo-status" class="demo-status" role="status" aria-live="polite"></p>
-              <div id="demo-ready" class="demo-ready" hidden>
-                <p>Decryption is complete. The PDF is available as a temporary browser file.</p>
-                <a id="demo-open-pdf" class="protected-button" target="_blank" rel="noopener noreferrer">Open decrypted PDF <span>↗</span></a>
-              </div>
-            </div>
-          </dialog>
-        </div>
-      </section>
 
       <section id="people" class="section people-section"><div class="container">
         <div class="section-intro reveal"><p class="kicker">Community</p><h2>The <span>people.</span></h2></div>
