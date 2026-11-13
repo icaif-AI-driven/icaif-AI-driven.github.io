@@ -119,6 +119,36 @@
       </div></section>
 
       <section id="submit" class="submit-section"><div class="container submit-layout reveal"><div><p class="kicker">Call for papers</p><h2>Submissions<br /><span>are closed.</span></h2></div><div><p>The submission deadline was 12 October 2026. Thank you to everyone who submitted a paper. Accepted contributions will be included in the programme.</p></div></div></section>
+      <!-- Social dinner registration. Configure the matching closing time in Tally. -->
+      <section id="social-dinner" class="section dinner-section"><div class="container">
+        <div class="section-intro"><p class="kicker">Beyond the workshop</p><h2>Join the <span>social dinner.</span></h2><p>Continue the conversation with fellow researchers and practitioners.</p></div>
+        <div class="dinner-details"><div><small>Date</small><strong>Saturday, 14 November 2026</strong></div><div><small>Dinner</small><strong>20:30 CET</strong></div><div><small>Location</small><strong>TBA</strong></div></div>
+        <p class="dinner-deadline">Registration closes on 14 November at <strong>19:00 CET</strong> (Italian time).</p>
+        <div id="dinner-registration"><iframe src="https://tally.so/embed/pey198?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1" loading="lazy" width="100%" height="520" frameborder="0" title="ICAIF social dinner registration"></iframe><p><a href="https://tally.so/r/pey198" target="_blank" rel="noopener noreferrer">Open registration form ↗</a></p></div>
+        <p id="dinner-registration-closed" hidden>Registration for the social dinner is closed.</p>
+      </div></section>
+      <style is:global>
+        .dinner-section { background: #edf3f0; }
+        .dinner-details { display:grid; grid-template-columns:2fr 1fr 1fr; gap:24px; padding:22px 0; border-top:1px solid #cfdbd5; border-bottom:1px solid #cfdbd5; }
+        .dinner-details small { display:block; text-transform:uppercase; letter-spacing:.12em; font-size:11px; color:#5f746d; margin-bottom:5px; }
+        .dinner-details strong { font-weight:500; }
+        .dinner-deadline { margin:24px 0; }
+        #dinner-registration iframe { display:block; border:0; }
+        @media(max-width:600px) { .dinner-details { grid-template-columns:1fr 1fr; } .dinner-details > div:first-child { grid-column:1/-1; } }
+      </style>
+      <script is:inline>
+        (() => {
+          const deadline = Date.parse('2026-11-14T19:00:00+01:00');
+          const updateDinnerRegistration = () => {
+            const closed = Date.now() >= deadline;
+            document.getElementById('dinner-registration').hidden = closed;
+            document.getElementById('dinner-registration-closed').hidden = !closed;
+          };
+          updateDinnerRegistration();
+          setInterval(updateDinnerRegistration, 15000);
+        })();
+      </script>
+
     </main>
 
     <footer><div class="container footer-layout"><div><a class="brand footer-brand" href="#home"><span class="brand-symbol">I</span><span>ICAIF <b>'26</b></span></a><p>AI-Driven Market Microstructure<br />in Centralized and Decentralized Finance</p></div><div><p>Workshop at the 7th ACM International Conference on AI in Finance<br />Milan · 14–17 November 2026</p><a href="https://icaif2026.org/" target="_blank" rel="noreferrer">Visit ICAIF 2026 ↗</a></div></div></footer>
