@@ -1,21 +1,17 @@
-# Publishing protected workshop presentations
+# Workshop presentation PDFs
 
-The public GitHub repository must contain only encrypted presentation files. Plain PDFs belong in the ignored local folder `private-presentations/` and must never be committed.
+Upload ordinary, unencrypted PDF files to `public/presentations/` on the `main` branch, with these exact filenames:
 
-## Source filenames
+| Talk | Filename |
+| --- | --- |
+| Anastasia Borovykh — Lessons from Language Pretraining That Generalise to Order Books | anastasia-borovykh.pdf |
+| OrderFlowDiT | orderflowdit.pdf |
+| Beyond Supra-Competitive Outcomes | beyond-supra-competitive-outcomes.pdf |
+| Herding or Racing? | herding-or-racing.pdf |
+| Same Exposure, Different Clocks | same-exposure-different-clocks.pdf |
+| Chat2LOB | chat2lob.pdf |
+| When Proofs Are Abundant, What Is a Paper For? | when-proofs-are-abundant.pdf |
 
-Place all seven talk PDFs in `private-presentations/` using these names:
+On GitHub open this folder, choose Add file → Upload files, and commit the upload to main. No HTML changes or encryption commands are needed. The opening page displays the PDF with slide navigation, open and download controls. Files uploaded here are public.
 
-- `anastasia-borovykh.pdf`
-- `orderflowdit.pdf`
-- `beyond-supra-competitive-outcomes.pdf`
-- `herding-or-racing.pdf`
-- `same-exposure-different-clocks.pdf`
-- `chat2lob.pdf`
-- `when-proofs-are-abundant.pdf`
-
-Then run `npm run encrypt:presentations` from the project root. The command asks for a password without echoing it, requires a 20 character minimum, and writes the encrypted outputs to `public/presentations/encrypted/`. It uses AES-256-GCM with PBKDF2-SHA-256 and 600,000 iterations. Each run encrypts the files as one set with a shared salt and distinct random nonces.
-
-Commit only the generated `.pdf.enc` files. The current demo asks for the passphrase when you open the sample and keeps it only in memory; it never stores or sends it. The encrypted real presentation set is not uploaded yet. When the real PDFs are provided, they can be encrypted with a separate strong workshop passphrase and decrypted locally in the browser. Never reuse the public demo passphrase for real talks.
-
-Anyone who obtains both the encrypted files and the password can decrypt them. Use a strong password and distribute it to workshop participants through a separate channel.
+Existing .pdf.enc files are legacy encrypted copies; renaming them does not turn them into PDFs. Upload the original PDFs instead. The workshop programme remains at public/icaif-2026-workshop-program.pdf.
