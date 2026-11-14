@@ -466,7 +466,7 @@
     (() => {
       const talks = [
         { time: "14:00", type: "Welcome", title: "Welcome and Opening Remarks", document: "/icaif-2026-workshop-program.pdf", speaker: "Workshop Organizing Committee" },
-        { time: "14:05", type: "Opening invited talk", title: "Lessons from Language Pretraining That Generalise to Order Books", presentation: "anastasia-borovykh", speaker: "Anastasia Borovykh · Capital Fund Management (CFM)" },
+        { time: "14:05", type: "Opening invited talk", title: "Lessons from Language Pretraining That Generalise to Order Books", presentation: "anastasia-borovykh", publicPdf: "/presentations/encrypted/anastasia.pdf", speaker: "Anastasia Borovykh · Capital Fund Management (CFM)" },
         { time: "14:45", type: "Contributed talk", title: "OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting", presentation: "orderflowdit", speaker: "Tucker Balch · Emory University" },
         { time: "15:10", type: "Contributed talk", title: "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games", presentation: "beyond-supra-competitive-outcomes", speaker: "Christos-Spyridon Koulouris · Carlo Campajola · University College London" },
         { time: "15:35", type: "Contributed talk", title: "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets", presentation: "herding-or-racing", speaker: "Yichong Bai · The Hong Kong Polytechnic University" },
@@ -562,10 +562,10 @@
           if (talk.presentation) {
             const link = document.createElement("a");
             link.className = "presentation-link";
-            link.href = `/presentations/encrypted/${talk.presentation}.pdf.enc`;
+            link.href = talk.publicPdf || `/presentations/encrypted/${talk.presentation}.pdf.enc`;
             link.dataset.presentation = talk.presentation;
             link.textContent = talk.title;
-            link.setAttribute("aria-label", `Open encrypted presentation: ${talk.title}`);
+            link.setAttribute("aria-label", `Open ${talk.publicPdf ? "" : "encrypted "}presentation: ${talk.title}`);
             spotlight.append(link);
           } else if (talk.document) {
             const link = document.createElement("a");
@@ -685,7 +685,8 @@
         const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: pendingPresentation.iv }, key, pendingPresentation.ciphertext);
         return new Blob([plain], { type: "application/pdf" });
       }
-      async function showDecryptedPresentation(blob) {
+      async function showDecryptedPresentation(blob, isPublic = false) {
+        const statusPrefix = isPublic ? "Presentation loaded." : "Presentation unlocked.";
         const version = presentationVersion;
         const current = () => presentationDialog.open && version === presentationVersion;
         if (activePresentationUrl) URL.revokeObjectURL(activePresentationUrl);
@@ -696,34 +697,46 @@
         presentationPassword.value = "";
         presentationFrame.hidden = false;
         presentationForm.hidden = true;
-        presentationStatus.textContent = "Presentation unlocked. Loading slides…";
+        presentationStatus.textContent = `${statusPrefix} Loading slides…`;
         try {
           const viewer = await import("/presentation-viewer.mjs");
           if (!current()) return;
           const cleanup = await viewer.mountPresentation(blob, presentationFrame, current);
           if (!current()) { cleanup(); return; }
           viewerCleanup = cleanup;
-          presentationStatus.textContent = "Presentation unlocked. Use Previous / Next or the arrow keys to change slides.";
+          presentationStatus.textContent = `${statusPrefix} Use Previous / Next or the arrow keys to change slides.`;
         } catch (_) {
-          if (current()) presentationStatus.textContent = "Presentation unlocked. Use Open PDF in new tab or Download PDF above if the slide viewer is unavailable.";
+          if (current()) presentationStatus.textContent = `${statusPrefix} Use Open PDF in new tab or Download PDF above if the slide viewer is unavailable.`;
         }
       }
       async function openPresentation(presentationId) {
         const talk = talks.find(item => item.presentation === presentationId);
         if (!talk) return;
-        presentationVersion++;
+        const version = ++presentationVersion;
         viewerCleanup?.(); viewerCleanup = null;
         document.getElementById("presentation-actions").hidden = true;
         stage.classList.add("reading");
         window.clearInterval(nextTalk); window.clearInterval(nextPhrase);
         presentationDialogTitle.textContent = talk.title;
-        presentationStatus.textContent = "Loading encrypted presentation…";
+        presentationStatus.textContent = talk.publicPdf ? "Loading presentation…" : "Loading encrypted presentation…";
         presentationForm.hidden = true;
         presentationFrame.hidden = true;
         presentationFrame.replaceChildren();
         presentationPassword.value = "";
         pendingPresentation = null;
         if (!presentationDialog.open) presentationDialog.showModal();
+        if (talk.publicPdf) {
+          try {
+            const response = await fetch(talk.publicPdf, { cache: "default" });
+            if (!response.ok) throw new Error("PDF unavailable");
+            const blob = new Blob([await response.arrayBuffer()], { type: "application/pdf" });
+            if (!presentationDialog.open || version !== presentationVersion) return;
+            await showDecryptedPresentation(blob, true);
+          } catch (_) {
+            if (presentationDialog.open && version === presentationVersion) presentationStatus.textContent = "The presentation could not be loaded. Please try again.";
+          }
+          return;
+        }
         try {
           const response = await fetch(`${presentationDirectory}${presentationId}.pdf.enc`, { cache: "default" });
           if (!response.ok) {
