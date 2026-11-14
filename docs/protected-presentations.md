@@ -1,17 +1,16 @@
-# Workshop presentation PDFs
+# Workshop presentation uploads
 
-Upload ordinary, unencrypted PDF files to `public/presentations/` on the `main` branch, with these exact filenames:
+Existing presentations retain their original paths and access:
+- Anastasia Borovykh: public/presentations/encrypted/anastasia.pdf (ordinary public PDF).
+- Beyond Supra-Competitive Outcomes: public/presentations/encrypted/beyond-supra-competitive-outcomes.pdf.enc
+- Herding or Racing?: public/presentations/encrypted/herding-or-racing.pdf.enc
+- Chat2LOB: public/presentations/encrypted/chat2lob.pdf.enc
 
-| Talk | Filename |
-| --- | --- |
-| Anastasia Borovykh — Lessons from Language Pretraining That Generalise to Order Books | anastasia-borovykh.pdf |
-| OrderFlowDiT | orderflowdit.pdf |
-| Beyond Supra-Competitive Outcomes | beyond-supra-competitive-outcomes.pdf |
-| Herding or Racing? | herding-or-racing.pdf |
-| Same Exposure, Different Clocks | same-exposure-different-clocks.pdf |
-| Chat2LOB | chat2lob.pdf |
-| When Proofs Are Abundant, What Is a Paper For? | when-proofs-are-abundant.pdf |
+The three .pdf.enc files remain encrypted and use the existing workshop password flow.
 
-On GitHub open this folder, choose Add file → Upload files, and commit the upload to main. No HTML changes or encryption commands are needed. The opening page displays the PDF with slide navigation, open and download controls. Files uploaded here are public.
+Upload the three missing presentations as ordinary public PDFs in public/presentations/:
+- orderflowdit.pdf
+- same-exposure-different-clocks.pdf
+- when-proofs-are-abundant.pdf
 
-Existing .pdf.enc files are legacy encrypted copies; renaming them does not turn them into PDFs. Upload the original PDFs instead. The workshop programme remains at public/icaif-2026-workshop-program.pdf.
+Use GitHub Add file → Upload files and commit to main. No HTML edits or encryption are required for these three files. They will be publicly accessible. Do not rename .pdf.enc files to .pdf.
