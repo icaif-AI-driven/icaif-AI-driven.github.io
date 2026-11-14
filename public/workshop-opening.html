@@ -404,7 +404,7 @@
             <article class="agenda-row" data-index="3"><time class="agenda-time">15:10</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/beyond-supra-competitive-outcomes.pdf.enc" data-presentation="beyond-supra-competitive-outcomes">Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games</a></strong></div><i class="agenda-dot"></i></article>
             <article class="agenda-row" data-index="4"><time class="agenda-time">15:35</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/herding-or-racing.pdf.enc" data-presentation="herding-or-racing">Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets</a></strong></div><i class="agenda-dot"></i></article>
             <article class="agenda-row" data-index="5"><time class="agenda-time">16:00</time><div class="agenda-copy"><span>Coffee break</span><strong>Poster presentations · coffee break</strong></div><i class="agenda-dot"></i></article>
-            <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/same-exposure-different-clocks.pdf" data-presentation="same-exposure-different-clocks">Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</a></strong></div><i class="agenda-dot"></i></article>
+            <article class="agenda-row" data-index="6"><time class="agenda-time">16:30</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/same-exposure-different-clocks.pptx" target="_blank" rel="noopener noreferrer">Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs</a></strong></div><i class="agenda-dot"></i></article>
             <article class="agenda-row" data-index="7"><time class="agenda-time">16:55</time><div class="agenda-copy"><span>Contributed talk</span><strong><a class="presentation-link" href="/presentations/encrypted/chat2lob.pdf.enc" data-presentation="chat2lob">Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models</a></strong></div><i class="agenda-dot"></i></article>
             <article class="agenda-row" data-index="8"><time class="agenda-time">17:20</time><div class="agenda-copy"><span>Closing invited talk</span><strong><a class="presentation-link" href="/presentations/when-proofs-are-abundant.pdf" data-presentation="when-proofs-are-abundant">When Proofs Are Abundant, What Is a Paper For?</a></strong></div><i class="agenda-dot"></i></article>
           </div>
@@ -471,7 +471,7 @@
         { time: "15:10", type: "Contributed talk", title: "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games", presentation: "beyond-supra-competitive-outcomes", speaker: "Christos-Spyridon Koulouris · Carlo Campajola · University College London" },
         { time: "15:35", type: "Contributed talk", title: "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets", presentation: "herding-or-racing", speaker: "Yichong Bai · The Hong Kong Polytechnic University" },
         { time: "16:00", type: "Coffee break", title: "Poster presentations · coffee break", speaker: "Poster session · 16:00–16:30 CET" },
-        { time: "16:30", type: "Contributed talk", title: "Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs", presentation: "same-exposure-different-clocks", publicPdf: "/presentations/same-exposure-different-clocks.pdf", speaker: "Siyu Li · Westlake University" },
+        { time: "16:30", type: "Contributed talk", title: "Same Exposure, Different Clocks: Price Discovery and Cost-Aware Trading in Matched ETFs", document: "/presentations/same-exposure-different-clocks.pptx", speaker: "Siyu Li · Westlake University" },
         { time: "16:55", type: "Contributed talk", title: "Chat2LOB: A Natural-Language Calibration of Agent-Based LOB Market Simulation using Large Language Models", presentation: "chat2lob", speaker: "Andrea Coletta · Banca d’Italia" },
         { time: "17:20", type: "Closing invited talk", title: "When Proofs Are Abundant, What Is a Paper For?", presentation: "when-proofs-are-abundant", publicPdf: "/presentations/when-proofs-are-abundant.pdf", speaker: "Charles-Albert Lehalle · École Polytechnique" }
       ];
@@ -574,7 +574,7 @@
             link.target = "_blank";
             link.rel = "noopener noreferrer";
             link.textContent = talk.title;
-            link.setAttribute("aria-label", "Open the workshop programme PDF");
+            link.setAttribute("aria-label", `Open ${talk.document.endsWith(".pptx") ? "PowerPoint presentation" : "workshop programme PDF"}: ${talk.title}`);
             spotlight.append(link);
           } else {
             spotlight.textContent = talk.title;
